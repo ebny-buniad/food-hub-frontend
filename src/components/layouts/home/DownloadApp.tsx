@@ -14,7 +14,7 @@ export default function DownloadApp() {
                 </button>
             </div>
         </div>
-        <div className='bg-white w-60 rounded-2xl p-5 mx-auto mt-5'>
+        <div className='bg-white w-60 rounded-2xl p-5 max-sm:mx-auto mt-5'>
             <img className='w-50 mx-auto border-red-500' src="https://foodibd.com/_next/static/media/qr-code.9111b0a2.svg" alt="" />
             <p className='text-center'>Download app</p>
         </div>
