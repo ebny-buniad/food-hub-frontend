@@ -1,3 +1,7 @@
+""
+
+import Link from "next/link";
+
 export function MealCard({ meal }: { meal: Meal }) {
   const {
     id,
@@ -22,12 +26,9 @@ export function MealCard({ meal }: { meal: Meal }) {
             alt="Product"
             className="w-full h-52 object-cover"
           />
-          <span className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Sale
-          </span>
         </div>
 
-        <div className="p-5 space-y-4">
+        <div className="p-2 space-y-4">
           <div>
             <h3 className="text-xl font-bold text-gray-900">{name}</h3>
             <p className="text-gray-500 mt-1">{description}</p>
@@ -45,9 +46,14 @@ export function MealCard({ meal }: { meal: Meal }) {
             </div>
           </div>
 
-          <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
-            Add to Cart
-          </button>
+          <div className="flex justify-end gap-3">
+            <button className="bg-gray-50 border p-2 rounded-md text text-xs cursor-pointer">
+              Add to Cart
+            </button>
+            <Link href={`/meals/${id}`} className="bg-black p-2 rounded-md text-white text-xs cursor-pointer">
+              See Details
+            </Link>
+          </div>
         </div>
       </div>
     </div>

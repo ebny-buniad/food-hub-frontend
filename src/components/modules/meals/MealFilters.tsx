@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-export function MealFilters() {
+export function MealFilters({ categorys }: { categorys: any }) {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -33,8 +33,11 @@ export function MealFilters() {
         defaultValue={params.get("cuisine") ?? ""}
       >
         <option value="">All Cuisine</option>
-        <option value="Italian">Italian</option>
-        <option value="Indian">Indian</option>
+        {
+          categorys.map((category: any) => (
+            <option key={category.id} value={`${category.cuisine}`}>{category.cuisine}</option>
+          ))
+        }
       </select>
 
       {/* Price */}
@@ -45,6 +48,9 @@ export function MealFilters() {
         <option value="">Min Price</option>
         <option value="100">100</option>
         <option value="200">200</option>
+        <option value="300">300</option>
+        <option value="400">400</option>
+        <option value="500">500</option>
       </select>
     </div>
   );

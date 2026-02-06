@@ -1,5 +1,6 @@
-import { MealCard } from "@/components/layouts/MealCard";
-import { MealFilters } from "@/components/layouts/MealFilters";
+
+import { MealCard } from "@/components/modules/meals/MealCard";
+import { MealFilters } from "@/components/modules/meals/MealFilters";
 import { mealsServices } from "@/services/meals.service";
 
 export default async function MealsPage({
@@ -28,14 +29,15 @@ export default async function MealsPage({
 
   // fetch meals from backend
   const { data } = await mealsServices.getMeals(filters, { cache: "no-store" });
+  const { data: categorys } = await mealsServices.getCategories();
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto mt-10 p-3">
       {/* Client-side Filter UI */}
-      <MealFilters />
+      <MealFilters categorys={categorys} />
 
       {/* Meals Grid */}
-      <div className="grid grid-cols-5 gap-5 mt-10">
+      <div className="grid justify-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-10">
         {data.map((meal: Meal) => (
           <MealCard key={meal.id} meal={meal} />
         ))}
