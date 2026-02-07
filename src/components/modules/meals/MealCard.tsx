@@ -1,6 +1,7 @@
-""
-
+"use client"
+import { cartServices } from "@/services/cart.service";
 import Link from "next/link";
+import { useState } from "react";
 
 export function MealCard({ meal }: { meal: Meal }) {
   const {
@@ -14,17 +15,29 @@ export function MealCard({ meal }: { meal: Meal }) {
     thumbnail,
     isAvailable,
     reviews,
-    createdAt,
+    createdAt
   } = meal;
+
+  const [quantity, setQuantity] = useState(1)
+  const increase = () => setQuantity((prev) => prev + 1)
+  const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+
+  const handelCreateCart = async (id:any) => {
+    const items = {
+        mealId: id,
+        quantity: quantity
+      }
+   await cartServices.createCart(items)
+  }
 
   return (
     <div >
       <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
         <div className="relative">
           <img
-            src="https://media.istockphoto.com/id/888026614/photo/woman-going-to-eat-salad.jpg?s=612x612&w=0&k=20&c=hwUb7l-LMDFKC3aOm952UR07LI5pt6FNUzwFgBpj8kU="
-            alt="Product"
-            className="w-full h-52 object-cover"
+            src={thumbnail}
+            alt="Food"
+            className="w-full h-42 object-cover"
           />
         </div>
 
@@ -46,12 +59,38 @@ export function MealCard({ meal }: { meal: Meal }) {
             </div>
           </div>
 
+          {/* Quantity Selector */}
+          <div className="flex items-center rounded-md">
+            <button
+              onClick={decrease}
+              disabled={!isAvailable}
+              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-sm"
+            >
+              −
+            </button>
+
+            <span className="px-4 text-sm font-medium">
+              {quantity}
+            </span>
+
+            <button
+              onClick={increase}
+              disabled={!isAvailable}
+              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-sm"
+            >
+              +
+            </button>
+          </div>
+
           <div className="flex justify-end gap-3">
-            <button className="bg-gray-50 border p-2 rounded-md text text-xs cursor-pointer">
-              Add to Cart
+            <button
+              onClick={() => handelCreateCart(id)}
+              disabled={!isAvailable}
+              className="bg-gray-50 border p-2 rounded-md text text-xs cursor-pointer">
+              {isAvailable ? "Add to Cart" : "Unavailable"}
             </button>
             <Link href={`/meals/${id}`} className="bg-black p-2 rounded-md text-white text-xs cursor-pointer">
-              See Details
+              Details
             </Link>
           </div>
         </div>
