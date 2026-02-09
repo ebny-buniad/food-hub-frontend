@@ -1,5 +1,3 @@
-
-import { env } from "@/env";
 import { cookies } from "next/headers";
 
 const AUTH_URL = process.env.AUTH_URL;
@@ -27,4 +25,16 @@ export const userService = {
       return { data: null, error: { message: "Something Went Wrong" } };
     }
   },
+
+  getUserCookie: async function () {
+    try {
+      const cookieStore = await cookies();
+      const cookieHeader = cookieStore.toString();
+      return cookieHeader;
+    }
+    catch (err) {
+      console.log(err)
+      return { data: null, error: { message: "Something Went Wrong" } };
+    }
+  }
 };

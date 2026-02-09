@@ -1,4 +1,4 @@
-interface Meal {
+export interface Meal {
     id?: string
     providerId?: string
     dietary?: string
@@ -12,4 +12,20 @@ interface Meal {
     isAvailable?: boolean
     reviews?: string[]
     createdAt?: Date
+}
+
+
+export interface Cart {
+    id: string,
+    cartId: string,
+    mealId: string,
+    quantity: number,
+    price: string,
+    meals: {
+        name: string,
+        thumbnail: string,
+        category: {
+            cuisine: string
+        }
+    }
 }

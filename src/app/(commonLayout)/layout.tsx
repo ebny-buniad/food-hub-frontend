@@ -10,7 +10,9 @@ export default function commonLayout({
     return (
         <div>
             <Navbar></Navbar>
-            {children}
+            <div className='min-h-[calc(100vh-520px)]'>
+                {children}
+            </div>
             <Footer></Footer>
         </div>
     )

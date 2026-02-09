@@ -2,6 +2,7 @@
 import { cartServices } from "@/services/cart.service";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function MealCard({ meal }: { meal: Meal }) {
   const {
@@ -22,12 +23,23 @@ export function MealCard({ meal }: { meal: Meal }) {
   const increase = () => setQuantity((prev) => prev + 1)
   const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
 
-  const handelCreateCart = async (id:any) => {
-    const items = {
+  const handelCreateCart = async (id: any) => {
+    try {
+      const items = {
         mealId: id,
         quantity: quantity
       }
-   await cartServices.createCart(items)
+      const { data, error } = await cartServices.createCart(items)
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      toast.success("Added to cart successfully!")
+    }
+    catch (error) {
+
+    }
+
   }
 
   return (

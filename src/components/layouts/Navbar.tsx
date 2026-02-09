@@ -1,23 +1,18 @@
 "use client";
 
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Book, CarTaxiFrontIcon, Menu, ShoppingCart, Sunset, Trees, Zap } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 import {
   Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -47,6 +42,10 @@ interface Navbar1Props {
   };
   menu?: MenuItem[];
   auth?: {
+    cart: {
+      title: string;
+      url: string;
+    };
     login: {
       title: string;
       url: string;
@@ -77,6 +76,7 @@ const Navbar = ({
     },
   ],
   auth = {
+    cart: { title: ``, url: "/cart" },
     login: { title: "Login", url: "/auth/login" },
     signup: { title: "Sign up", url: "/auth/signup" },
   },
@@ -106,6 +106,9 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
+            <Button asChild variant="outline" size="sm">
+              <Link href={auth.cart.url}><ShoppingCart></ShoppingCart></Link>
+            </Button>
             <Button asChild variant="outline" size="sm">
               <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>

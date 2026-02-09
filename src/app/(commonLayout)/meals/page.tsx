@@ -1,4 +1,3 @@
-
 import { MealCard } from "@/components/modules/meals/MealCard";
 import { MealFilters } from "@/components/modules/meals/MealFilters";
 import { mealsServices } from "@/services/meals.service";
