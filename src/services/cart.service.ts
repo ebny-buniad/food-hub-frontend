@@ -31,6 +31,7 @@ export const cartServices = {
         }
     },
 
+    // Get user active cart
     getCart: async function (cookieHeader: any) {
         try {
             const url = new URL(`${API_URL}/cart`);
@@ -39,10 +40,28 @@ export const cartServices = {
                     cookie: cookieHeader
                 }
             });
-            const {data} = await res.json();
+            const { data } = await res.json();
             return data;
         } catch (err) {
-            console.error(err);
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
+    },
+
+    // Delete cart items
+    deleteCart: async function (id: string) {
+        try {
+            const url = new URL(`${API_URL}/cart/${id}`);
+            const res = await fetch(url, {
+                method: "DELETE",
+                credentials: "include",
+                cache: "no-store"
+            })
+            return {
+                res,
+                seccess: true
+            }
+        }
+        catch (err) {
             return { data: null, error: { message: "Something Went Wrong" } };
         }
     }

@@ -1,7 +1,32 @@
+"use client"
+
+import { Button } from '@/components/ui/button';
+import { cartServices } from '@/services/cart.service';
 import { Cart } from '@/types'
 import { Minus, Plus, X } from 'lucide-react'
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 export default function CartItems({ items }: { items: any }) {
 
+  const router = useRouter();
+
+  const handelDeleteCart = async (id: string) => {
+
+    const data = await cartServices.deleteCart(id);
+    if (data.seccess === true) {
+      toast.success("Item removed");
+      router.refresh();
+    }
+    else{
+      toast.error("Something went wrong!")
+    }
+
+
+
+  }
+
+
+  // For total price count
   let totalPrice = 0;
 
   return (
@@ -44,6 +69,7 @@ export default function CartItems({ items }: { items: any }) {
                 items.map((item: Cart) => {
                   const {
                     id,
+                    mealId,
                     quantity,
                     price,
                     meals: {
@@ -97,7 +123,11 @@ export default function CartItems({ items }: { items: any }) {
                           <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">
                             ৳ {price}
                           </p>
-                          <button className='border p-2 rounded-md hover:border-red-400 cursor-pointer'>
+                          <button
+                            onClick={() => {
+                              handelDeleteCart(id)
+                            }}
+                            className='border p-2 rounded-md hover:border-red-400 cursor-pointer'>
                             <X size={16}></X>
                           </button>
                         </div>
@@ -106,10 +136,8 @@ export default function CartItems({ items }: { items: any }) {
                   )
                 })
               }
-
-
-
             </div>
+
             <div className=" col-span-12 xl:col-span-4 bg-gray-50 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:pl-8 py-24">
               <h2 className="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">
                 Order Summary
@@ -117,7 +145,7 @@ export default function CartItems({ items }: { items: any }) {
               <div className="mt-8">
                 <div className="flex items-center justify-between pb-6">
                   <p className="font-normal text-lg leading-8 text-black">{items.length} Items</p>
-                  <p className="font-medium text-lg leading-8 text-black">$480.00</p>
+                  <p className="font-medium text-lg leading-8 text-black"> ৳ {totalPrice}</p>
                 </div>
                 <form>
                   <label className="flex  items-center mb-1.5 text-gray-600 text-sm font-medium">
@@ -125,7 +153,7 @@ export default function CartItems({ items }: { items: any }) {
                   </label>
 
                   <div className="max-w-sm w-full border rounded-lg">
-                    <textarea className="py-2 px-3 sm:py-3 sm:px-4 block w-full bg-layer border-layer-line rounded-lg sm:text-sm text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb"></textarea>
+                    <textarea required className="py-2 px-3 sm:py-3 sm:px-4 block w-full bg-layer border-layer-line rounded-lg sm:text-sm text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb"></textarea>
                   </div>
                   <div className="flex items-center justify-between py-8">
                     <p className="font-medium text-xl leading-8 text-black">
@@ -135,9 +163,9 @@ export default function CartItems({ items }: { items: any }) {
                       ৳ {totalPrice}
                     </p>
                   </div>
-                  <button className="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">
-                    Checkout
-                  </button>
+                  <Button className='w-full py-6 cursor-pointer'>
+                    Checkout & Order
+                  </Button>
                 </form>
               </div>
             </div>
