@@ -1,5 +1,3 @@
-import { userService } from "./user.service";
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const cartServices = {

@@ -22,6 +22,7 @@ export interface Cart {
     quantity: number,
     price: string,
     meals: {
+        providerId: string
         name: string,
         thumbnail: string,
         category: {

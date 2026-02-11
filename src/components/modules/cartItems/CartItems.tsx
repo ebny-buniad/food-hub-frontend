@@ -1,28 +1,72 @@
 "use client"
 
 import { Button } from '@/components/ui/button';
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Textarea } from '@/components/ui/textarea';
 import { cartServices } from '@/services/cart.service';
+import { orderServices } from '@/services/order.service';
 import { Cart } from '@/types'
+import { useForm } from '@tanstack/react-form';
 import { Minus, Plus, X } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-export default function CartItems({ items }: { items: any }) {
+import * as z from 'zod'
 
+export default function CartItems({ items }: { items: Cart[] }) {
+
+  // Cart items for order create
+  const payload = {
+    cartId: items[0]?.cartId,
+    providerId: items[0]?.meals?.providerId,
+    items: items.map(({ mealId, quantity }) => ({
+      mealId,
+      quantity,
+    })),
+  };
+
+  // Zod validation
+  const formSchema = z.object({
+    deliveryAddress: z.string().min(1, "Shipping address is required!")
+  });
+
+  // Refatch data form db
   const router = useRouter();
 
-  const handelDeleteCart = async (id: string) => {
+  // Tanstack form
+  const form = useForm({
+    defaultValues: {
+      deliveryAddress: ""
+    },
+    validators: {
+      onSubmit: formSchema
+    },
+    onSubmit: async ({ value }) => {
+      const orderDetails = {
+        ...value,
+        ...payload
+      }
+      try {
+        const result = await orderServices.createOrder(orderDetails);
+        if (result.success === true) {
+          toast.success("Your order has been placed!")
+        }
+        router.refresh();
+      }
+      catch (err) {
+        toast.error("Something went wrong, please try again!");
+      }
+    }
+  })
 
+  const handelDeleteCart = async (id: string) => {
     const data = await cartServices.deleteCart(id);
     if (data.seccess === true) {
       toast.success("Item removed");
       router.refresh();
     }
-    else{
+    else {
       toast.error("Something went wrong!")
     }
-
-
-
   }
 
 
@@ -67,12 +111,13 @@ export default function CartItems({ items }: { items: any }) {
 
               {
                 items.map((item: Cart) => {
-                  const {
+                  let {
                     id,
-                    mealId,
                     quantity,
                     price,
+                    mealId,
                     meals: {
+                      providerId,
                       name,
                       thumbnail,
                       category: { cuisine },
@@ -81,7 +126,6 @@ export default function CartItems({ items }: { items: any }) {
 
                   const allPrice = Number(totalPrice) + Number(price);
                   totalPrice = allPrice;
-
 
                   return (
                     <div key={item.id} className="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6  border-b border-gray-200 group">
@@ -147,14 +191,38 @@ export default function CartItems({ items }: { items: any }) {
                   <p className="font-normal text-lg leading-8 text-black">{items.length} Items</p>
                   <p className="font-medium text-lg leading-8 text-black"> ৳ {totalPrice}</p>
                 </div>
-                <form>
-                  <label className="flex  items-center mb-1.5 text-gray-600 text-sm font-medium">
-                    Shipping address
-                  </label>
 
-                  <div className="max-w-sm w-full border rounded-lg">
-                    <textarea required className="py-2 px-3 sm:py-3 sm:px-4 block w-full bg-layer border-layer-line rounded-lg sm:text-sm text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb"></textarea>
-                  </div>
+                <form onSubmit={(e) => {
+                  e.preventDefault()
+                  form.handleSubmit()
+                }}>
+                  <FieldGroup>
+                    <form.Field
+                      name="deliveryAddress"
+                      children={(field) => {
+                        const isInvalid =
+                          field.state.meta.isTouched && !field.state.meta.isValid;
+                        return (
+                          <Field>
+                            <FieldLabel htmlFor={field.name} className='mb-1.5 text-gray-600 text-sm font-medium'>Shipping address</FieldLabel>
+                            <Textarea
+                              id={field.name}
+                              name={field.name}
+                              value={field.state.value}
+                              onChange={(e) => field.handleChange(e.target.value)}
+                              className='py-4 px-3 sm:py-3 sm:px-4 block w-full bg-layer border-layer-line rounded-lg sm:text-sm text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb'
+                            >
+                            </Textarea>
+                            {isInvalid && (
+                              <FieldError errors={field.state.meta.errors} />
+                            )}
+                          </Field>
+                        )
+                      }}
+                    >
+                    </form.Field>
+                  </FieldGroup>
+
                   <div className="flex items-center justify-between py-8">
                     <p className="font-medium text-xl leading-8 text-black">
                       {items.length} Items
@@ -163,7 +231,8 @@ export default function CartItems({ items }: { items: any }) {
                       ৳ {totalPrice}
                     </p>
                   </div>
-                  <Button className='w-full py-6 cursor-pointer'>
+                  <Button className='w-full py-6 cursor-pointer'
+                    type='submit'>
                     Checkout & Order
                   </Button>
                 </form>
