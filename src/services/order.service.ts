@@ -14,12 +14,31 @@ export const orderServices = {
                 credentials: "include",
                 body: JSON.stringify(payload)
             })
-
             const result = await res.json();
             return {
                 data: result,
                 success: true,
                 error: null
+            }
+        }
+        catch (err) {
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
+    },
+
+    // Get user orders
+    getOrders: async function (cookieHeader:string) {
+        try {
+            const url = new URL(`${API_URL}/orders`);
+            const res = await fetch(url.toString(), {
+                headers: {
+                    cookie: cookieHeader
+                },
+                credentials: "include"
+            });
+            const result = await res.json();
+            return {
+                data: result
             }
         }
         catch (err) {

@@ -38,3 +38,25 @@ export interface Route {
         url: string
     }[];
 }
+
+export type OrderItem = {
+    id: string
+    status: string
+    deliveryAddress: string
+    paymentMethod: string
+    totalAmount: string
+    createdAt: string
+    provider: {
+        id: string
+        restaurentName: string
+    }
+    orderItems: {
+        quantity: number
+        price: string
+        meals: {
+            id: string
+            name: string
+            thumbnail: string
+        }
+    }[]
+}
