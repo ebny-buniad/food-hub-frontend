@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
@@ -6,7 +8,10 @@ import { OrderItem } from '@/types';
 
 export default function MyOrdersList({ orderItems }: any) {
     const items = orderItems?.data;
-    console.log(items)
+
+    const handelCancleOrder = (id: string) => {
+        console.log(id)
+    }
 
     return (
         <div className="px-4 space-y-10">
@@ -30,7 +35,7 @@ export default function MyOrdersList({ orderItems }: any) {
                         paymentMethod,
                         totalAmount,
                         createdAt,
-                        provider: { id: providerId, restaurentName },
+                        provider: { restaurentName },
                         orderItems,
                     } = item;
 
@@ -42,8 +47,11 @@ export default function MyOrdersList({ orderItems }: any) {
                                     <p className="text-sm text-muted-foreground mt-2">
                                         Order ID: <span className="font-medium text-primary">#10234987</span>
                                     </p>
+                                    <p className="text-sm text-muted-foreground mt-2">
+                                        Restaurent name: <span className="font-medium text-primary">{restaurentName}</span>
+                                    </p>
                                     <p className="text-sm text-muted-foreground mt-1">
-                                        Payment Date: 18 March 2021
+                                        Payment Method: <span className="font-medium text-primary">{paymentMethod}</span>
                                     </p>
                                 </div>
                                 <Button>Track Your Order</Button>
@@ -59,45 +67,51 @@ export default function MyOrdersList({ orderItems }: any) {
                                         }
                                     } = order;
                                     return (
-                                        <CardContent key={index} className="space-y-8 pt-6">
+                                        <CardContent key={index} className="pt-3">
                                             {/* Product 1 */}
-                                            <div className="flex flex-col md:flex-row gap-6 border-b pb-6">
+                                            <div className="flex flex-col md:flex-row gap-6 border-b pb-3">
                                                 <Image
                                                     src={thumbnail}
                                                     alt="Product"
-                                                    width={140}
-                                                    height={140}
+                                                    width={80}
+                                                    height={40}
                                                     className="rounded-lg object-cover"
                                                 />
                                                 <div className="flex-1 grid md:grid-cols-2 gap-6">
                                                     <div>
                                                         <h3 className="text-xl font-semibold">
-                                                            Premium Quality Dust Watch
+                                                            {name}
                                                         </h3>
-                                                        <p className="text-muted-foreground mt-1">
-                                                            By: Dust Studios
-                                                        </p>
+
                                                         <p className="mt-2 text-sm">
-                                                            Size: <span className="text-muted-foreground">100 ml</span> | Qty:{" "}
-                                                            <span className="text-muted-foreground">2</span>
+                                                            Quantity:{" "}
+                                                            <span className="text-muted-foreground">{quantity}</span>
                                                         </p>
                                                     </div>
 
-                                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                                                         <div>
                                                             <p className="text-muted-foreground">Price</p>
-                                                            <p className="text-primary font-medium">৳ 100</p>
+                                                            <p className="text-primary font-medium">৳ {price}</p>
                                                         </div>
                                                         <div>
                                                             <p className="text-muted-foreground">Status</p>
-                                                            <Badge variant="secondary">Ready for Delivery</Badge>
+                                                            <Badge variant="secondary">{status}</Badge>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-muted-foreground">
+                                                                Order Date
+                                                            </p>
+                                                            <p className="text-emerald-600 font-medium">
+                                                                {new Date(createdAt).toDateString()}
+                                                            </p>
                                                         </div>
                                                         <div>
                                                             <p className="text-muted-foreground">
                                                                 Expected Delivery
                                                             </p>
                                                             <p className="text-emerald-600 font-medium">
-                                                                23 March 2021
+                                                                30-50 min
                                                             </p>
                                                         </div>
                                                     </div>
@@ -108,16 +122,14 @@ export default function MyOrdersList({ orderItems }: any) {
                                 })
                             }
 
-
-
                             {/* Footer */}
                             <div className="border-t px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
                                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                                    <Button variant="ghost" className="text-destructive border">
+                                    <Button onClick={() =>handelCancleOrder(id)} variant="ghost" className="text-destructive border">
                                         Cancel Order
                                     </Button>
                                     <p className="text-sm text-muted-foreground">
-                                        Paid using Credit Card ending with 8822
+                                        Address: {deliveryAddress}
                                     </p>
                                 </div>
                                 <p className="text-lg font-semibold">
