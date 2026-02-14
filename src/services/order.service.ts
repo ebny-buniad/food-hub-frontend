@@ -27,7 +27,7 @@ export const orderServices = {
     },
 
     // Get user orders
-    getOrders: async function (cookieHeader:string) {
+    getOrders: async function (cookieHeader: string) {
         try {
             const url = new URL(`${API_URL}/orders`);
             const res = await fetch(url.toString(), {
@@ -40,6 +40,22 @@ export const orderServices = {
             return {
                 data: result
             }
+        }
+        catch (err) {
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
+    },
+
+    // Update 
+    updateOrderStatus: async function (orderId: string) {
+        console.log(orderId)
+        try {
+            const url = new URL(`${API_URL}/orders/${orderId}`);
+            const res = await fetch(url.toString(), {
+                method: "PATCH",
+                credentials: "include"
+            })
+            return res;
         }
         catch (err) {
             return { data: null, error: { message: "Something Went Wrong" } };

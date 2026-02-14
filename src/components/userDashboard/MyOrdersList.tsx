@@ -5,12 +5,15 @@ import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Badge } from '../ui/badge'
 import { OrderItem } from '@/types';
+import { orderServices } from '@/services/order.service'
+import { useRouter } from 'next/navigation'
 
 export default function MyOrdersList({ orderItems }: any) {
+    const router = useRouter();
     const items = orderItems?.data;
-
-    const handelCancleOrder = (id: string) => {
-        console.log(id)
+    const handelCancleOrder = async (id: string) => {
+        await orderServices?.updateOrderStatus(id);
+        router.refresh();
     }
 
     return (
@@ -27,7 +30,7 @@ export default function MyOrdersList({ orderItems }: any) {
             {/* Main Card */}
 
             {
-                items.map((item: OrderItem) => {
+                items?.map((item: OrderItem) => {
                     const {
                         id,
                         status,
@@ -96,7 +99,17 @@ export default function MyOrdersList({ orderItems }: any) {
                                                         </div>
                                                         <div>
                                                             <p className="text-muted-foreground">Status</p>
-                                                            <Badge variant="secondary">{status}</Badge>
+                                                            <Badge
+                                                                variant="secondary"
+                                                                className={
+                                                                    status === "CANCELED"
+                                                                        ? "text-red-600 bg-red-100"
+                                                                        : "text-green-600 bg-green-100"
+                                                                }
+                                                            >
+                                                                {status}
+                                                            </Badge>
+
                                                         </div>
                                                         <div>
                                                             <p className="text-muted-foreground">
@@ -125,7 +138,7 @@ export default function MyOrdersList({ orderItems }: any) {
                             {/* Footer */}
                             <div className="border-t px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6">
                                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                                    <Button onClick={() =>handelCancleOrder(id)} variant="ghost" className="text-destructive border">
+                                    <Button onClick={() => handelCancleOrder(id)} variant="ghost" className="text-destructive border">
                                         Cancel Order
                                     </Button>
                                     <p className="text-sm text-muted-foreground">
@@ -141,8 +154,6 @@ export default function MyOrdersList({ orderItems }: any) {
                     )
                 })
             }
-
-
         </div>
     )
 }

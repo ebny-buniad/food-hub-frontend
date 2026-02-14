@@ -4,9 +4,9 @@ import { userService } from '@/services/user.service';
 
 
 export default async function Cart() {
-
-    const cookieHeader = await userService.getUserCookie();
-    const { data } = await cartServices.getCart(cookieHeader)
+    const cookieHeader = await userService?.getUserCookie();
+    const cartItems = await cartServices?.getCart(cookieHeader);
+    const data = cartItems?.data;
 
     return (
         <div>

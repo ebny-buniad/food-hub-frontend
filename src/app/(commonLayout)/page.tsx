@@ -8,8 +8,8 @@ import { userService } from "@/services/user.service";
 
 export default async function Home() {
 
-  const {session, user} = await getUser();
-  console.log(session, user)
+  // const {session, user} = await getUser();
+  // console.log(session, user)
 
   return (
     <div className="container mx-auto">
