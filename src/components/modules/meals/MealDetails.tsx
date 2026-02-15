@@ -6,9 +6,11 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { reviewServices } from "@/services/review.service";
 import { Review } from "@/types";
 import { useForm } from "@tanstack/react-form";
 import { Star } from "lucide-react";
+import { useRouter } from "next/navigation";
 import * as z from "zod";
 
 const reviewSchema = z.object({
@@ -17,6 +19,7 @@ const reviewSchema = z.object({
 })
 
 export function MealDetails({ meal }: { meal: any }) {
+    const router = useRouter();
     const {
         id,
         dietary,
@@ -43,8 +46,8 @@ export function MealDetails({ meal }: { meal: any }) {
                 mealId: id,
                 ...value
             }
-
-            console.log(reviewInfo)
+            await reviewServices.createReview(reviewInfo);
+            router.refresh();
         },
     })
 
