@@ -32,8 +32,6 @@ const formSchema = z.object({
   role: z.string().min(1, "Please select a role"),
 });
 
-
-
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   // const router = useRouter();
 

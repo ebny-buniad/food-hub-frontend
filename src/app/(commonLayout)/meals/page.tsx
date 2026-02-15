@@ -1,6 +1,7 @@
 import { MealCard } from "@/components/modules/meals/MealCard";
 import { MealFilters } from "@/components/modules/meals/MealFilters";
 import { mealsServices } from "@/services/meals.service";
+import { Meal } from "@/types";
 
 export default async function MealsPage({
   searchParams,
@@ -27,19 +28,25 @@ export default async function MealsPage({
   if (maxPrice) filters.maxPrice = maxPrice;
 
   // fetch meals from backend
-  const { data } = await mealsServices.getMeals(filters, { cache: "no-store" });
+  const data = await mealsServices.getMeals(filters, { cache: "no-store" });
+  const meals = data?.data;
   const { data: categorys } = await mealsServices.getCategories();
 
   return (
     <div className="container mx-auto mt-10 p-3">
       {/* Client-side Filter UI */}
       <MealFilters categorys={categorys} />
-
       {/* Meals Grid */}
       <div className="grid justify-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-10">
-        {data.map((meal: Meal) => (
-          <MealCard key={meal.id} meal={meal} />
-        ))}
+        {
+          meals.length === 0 ? (
+            <div>
+              <p>No meals here!</p>
+            </div>
+          ) : (meals.map((meal: Meal) => (
+            <MealCard key={meal.id} meal={meal} />
+          )))
+        }
       </div>
     </div>
   );

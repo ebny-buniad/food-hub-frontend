@@ -70,3 +70,9 @@ export interface Review {
         name: string
     }
 }
+
+
+export interface FormValues {
+  ratings: number
+  comment: string
+}

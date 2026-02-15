@@ -1,5 +1,6 @@
 "use client"
 import { cartServices } from "@/services/cart.service";
+import { Meal } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -37,9 +38,7 @@ export function MealCard({ meal }: { meal: Meal }) {
       toast.success("Added to cart successfully!")
     }
     catch (error) {
-
     }
-
   }
 
   return (
