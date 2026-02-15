@@ -14,6 +14,11 @@ import * as z from 'zod'
 
 export default function CartItems({ items }: { items: Cart[] }) {
 
+  const firstItem = items?.[0];
+  if (!firstItem) {
+    return <p className='text-center pt-30'>Cart is empty!!</p>;
+  }
+
   // Cart items for order create
   const payload = {
     cartId: items[0]?.cartId,

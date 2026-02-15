@@ -22,6 +22,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import { NavbarUser } from "./NavbarUser";
 
 interface MenuItem {
   title: string;
@@ -55,6 +56,17 @@ interface Navbar1Props {
       url: string;
     };
   };
+  user: {
+    name: string,
+    email: string,
+    emailVerified: boolean,
+    image: string,
+    createdAt: Date,
+    updatedAt: Date,
+    role: string,
+    status: string,
+    id: string
+  }
 }
 
 const Navbar = ({
@@ -80,8 +92,12 @@ const Navbar = ({
     login: { title: "Login", url: "/auth/login" },
     signup: { title: "Sign up", url: "/auth/signup" },
   },
+  user,
   className,
 }: Navbar1Props) => {
+
+  console.log('User in navbar', user)
+
   return (
     <section className={cn("py-4 border-b", className)}>
       <div className="container mx-auto">
@@ -95,7 +111,6 @@ const Navbar = ({
                 className="max-h-8 dark:invert"
                 alt={logo.alt}
               />
-
             </Link>
             <div className="flex items-center">
               <NavigationMenu>
@@ -105,16 +120,25 @@ const Navbar = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             <Button asChild variant="outline" size="sm">
               <Link href={auth.cart.url}><ShoppingCart></ShoppingCart></Link>
             </Button>
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+
+
+            {
+              user ? <>
+                <NavbarUser></NavbarUser>
+              </> : <>
+                <Button asChild variant="outline" size="sm">
+                  <Link href={auth.login.url}>{auth.login.title}</Link>
+                </Button>
+                <Button asChild size="sm">
+                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                </Button>
+              </>
+            }
+
           </div>
         </nav>
 
