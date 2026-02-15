@@ -8,7 +8,7 @@ import { OrderItem } from '@/types';
 import { orderServices } from '@/services/order.service'
 import { useRouter } from 'next/navigation'
 
-export default function MyOrdersList({ orderItems }: any) {
+export default function UserOrdersList({ orderItems }: any) {
     const router = useRouter();
     const items = orderItems?.data;
     const handelCancleOrder = async (id: string) => {
@@ -18,7 +18,6 @@ export default function MyOrdersList({ orderItems }: any) {
 
     return (
         <div className="px-4 space-y-10">
-
             {/* Header */}
             <div className="space-y-3">
                 <h2 className="text-4xl font-bold">My Orders</h2>

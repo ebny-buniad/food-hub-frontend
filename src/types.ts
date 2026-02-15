@@ -76,3 +76,13 @@ export interface FormValues {
   ratings: number
   comment: string
 }
+
+export interface Review {
+  id: string
+  customerId: string
+  mealId: string
+  rating: number
+  comment: string
+  createdAt: string
+  updatedAt: string
+}
