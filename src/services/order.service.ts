@@ -48,7 +48,6 @@ export const orderServices = {
 
     // Update 
     updateOrderStatus: async function (orderId: string) {
-        console.log(orderId)
         try {
             const url = new URL(`${API_URL}/orders/${orderId}`);
             const res = await fetch(url.toString(), {
