@@ -12,7 +12,7 @@ export const adminRoutes = [
             },
             {
                 title: "Manage categories",
-                url: "/dashboard/my-orders"
+                url: "/dashboard/manage-categories"
             },
         ]
     }

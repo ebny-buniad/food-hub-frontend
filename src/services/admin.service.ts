@@ -14,7 +14,6 @@ export const adminServices = {
             });
             return await res.json();
         } catch (err) {
-            console.error("Get Users Error:", err);
             return {
                 data: null,
                 error: { message: "Something Went Wrong" },
@@ -23,7 +22,6 @@ export const adminServices = {
     },
 
     // Update user status
-
     updateUserStatus: async function (id: string) {
         try {
             const url = new URL(`${NEXT_PUBLIC}/admin/users/status/${id}`);
@@ -34,7 +32,6 @@ export const adminServices = {
             return res;
         }
         catch (err) {
-            console.error("Get Users Error:", err);
             return {
                 data: null,
                 error: { message: "Something Went Wrong" },
@@ -43,18 +40,53 @@ export const adminServices = {
     },
 
     // Get all orders
-
     getAllOrders: async function (cookie: string) {
-        const url = new URL(`${API_URL}/admin/orders`);
-        const res = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                cookie: cookie
-            },
-            credentials: "include"
-        });
-        const result = await res.json();
-        return result;
+        try {
+            const url = new URL(`${API_URL}/admin/orders`);
+            const res = await fetch(url.toString(), {
+                method: "GET",
+                headers: {
+                    cookie: cookie
+                },
+                credentials: "include"
+            });
+            const result = await res.json();
+            return result;
+        }
+        catch (err) {
+            return {
+                data: null,
+                error: { message: "Something Went Wrong" },
+            };
+        }
+    },
+
+    // Create Categories
+    createCategories: async function (data: any) {
+        const payload = data;
+        console.log(payload)
+        try {
+            const url = new URL(`${NEXT_PUBLIC}/categories`);
+            const res = await fetch(url.toString(), {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(payload)
+            });
+
+            return {
+                data: res,
+                status: true
+            }
+        }
+        catch (err) {
+            return {
+                data: null,
+                error: { message: "Something Went Wrong" },
+            };
+        }
     }
 
 }
