@@ -1,5 +1,4 @@
 const API_URL = process.env.API_URL;
-
 const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const adminServices = {
@@ -41,6 +40,21 @@ export const adminServices = {
                 error: { message: "Something Went Wrong" },
             };
         }
+    },
+
+    // Get all orders
+
+    getAllOrders: async function (cookie: string) {
+        const url = new URL(`${API_URL}/admin/orders`);
+        const res = await fetch(url.toString(), {
+            method: "GET",
+            headers: {
+                cookie: cookie
+            },
+            credentials: "include"
+        });
+        const result = await res.json();
+        return result;
     }
 
 }

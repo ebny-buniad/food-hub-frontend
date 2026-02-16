@@ -4,7 +4,7 @@ export const adminRoutes = [
         items: [
             {
                 title: "All orders",
-                url: "/dashboard/my-reviews"
+                url: "/dashboard/all-orders"
             },
             {
                 title: "Manage users",

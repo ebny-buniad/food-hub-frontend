@@ -37,9 +37,7 @@ export default function UsersList({ users }: { users: User[] }) {
 
     return (
         <div className="p-6">
-            <div className="space-y-3">
-                <h2 className="text-4xl font-bold">All Users</h2>
-            </div>
+            <h3 className="pb-5 text-3xl font-semibold">All Users</h3>
             <div className="rounded-xl border shadow-sm overflow-hidden w-7xl">
                 <Table className="w-full">
                     <TableHeader>
