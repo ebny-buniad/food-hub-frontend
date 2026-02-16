@@ -1,20 +1,13 @@
 import { AppSidebar } from "@/components/AppSidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { getUser } from "@/services/getUser";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   user,
   provider,
   admin
@@ -24,10 +17,10 @@ export default function DashboardLayout({
   admin: React.ReactNode
 }) {
 
+  const currentUser = await getUser();
   const userInfo = {
-    role: "USER"
+    role: currentUser?.role
   }
-
 
   return (
     <SidebarProvider>

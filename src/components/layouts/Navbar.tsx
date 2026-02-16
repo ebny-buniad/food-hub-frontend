@@ -96,8 +96,6 @@ const Navbar = ({
   className,
 }: Navbar1Props) => {
 
-  console.log('User in navbar', user)
-
   return (
     <section className={cn("py-4 border-b", className)}>
       <div className="container mx-auto">
@@ -128,7 +126,7 @@ const Navbar = ({
 
             {
               user ? <>
-                <NavbarUser></NavbarUser>
+                <NavbarUser user={user as any}></NavbarUser>
               </> : <>
                 <Button asChild variant="outline" size="sm">
                   <Link href={auth.login.url}>{auth.login.title}</Link>

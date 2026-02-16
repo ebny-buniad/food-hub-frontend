@@ -4,11 +4,11 @@ export const userRoutes = [
         items: [
             {
                 title: "Orders",
-                url: "/user-dashboard/my-orders"
+                url: "/dashboard/my-orders"
             },
             {
                 title: "Reviews",
-                url: "/user-dashboard/my-reviews"
+                url: "/dashboard/my-reviews"
             },
         ]
     }
