@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
 import { adminServices } from "@/services/admin.service"
+import { toast } from "sonner"
 
 export default function DeleteCategories({ categories }: { categories: any }) {
 
@@ -24,7 +25,7 @@ export default function DeleteCategories({ categories }: { categories: any }) {
             router.refresh();
 
         } catch (error) {
-            console.error("Delete failed", error)
+            toast.error("Something went wrong!")
         }
     }
 

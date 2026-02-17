@@ -126,6 +126,30 @@ export const adminServices = {
                 error: { message: "Something Went Wrong" },
             };
         }
+    },
+
+    // Get admin stats
+
+    getAdminStats: async function (cookie: string) {
+        try {
+            const url = new URL(`${API_URL}/admin-stats`);
+            const res = await fetch(url.toString(), {
+                method: "GET",
+                headers: {
+                    cookie: cookie
+                },
+                credentials: "include"
+            })
+
+            const result = await res.json();
+            return result;
+        }
+        catch (err) {
+            return {
+                data: null,
+                error: { message: "Something Went Wrong" },
+            };
+        }
     }
 
 }

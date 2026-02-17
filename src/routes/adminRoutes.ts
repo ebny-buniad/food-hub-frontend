@@ -3,6 +3,10 @@ export const adminRoutes = [
         title: "Admin Dashboard",
         items: [
             {
+                title: "Home",
+                url: "/"
+            },
+            {
                 title: "All orders",
                 url: "/dashboard/all-orders"
             },
