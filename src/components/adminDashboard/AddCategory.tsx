@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { adminServices } from "@/services/admin.service"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const categorySchema = z.object({
     cuisine: z
@@ -17,6 +18,8 @@ const categorySchema = z.object({
 })
 
 export default function AddCategory() {
+
+    const router = useRouter();
     const form = useForm({
         defaultValues: {
             cuisine: "",
@@ -27,6 +30,7 @@ export default function AddCategory() {
             if (result?.data?.ok === true) {
                 toast.success("Ctegory created!");
                 form.reset();
+                router.refresh();
             }
             else {
                 toast.error("Duplicate category!")

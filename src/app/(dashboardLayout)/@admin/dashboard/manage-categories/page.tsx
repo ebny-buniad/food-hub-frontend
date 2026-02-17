@@ -1,9 +1,10 @@
 import AddCategory from '@/components/adminDashboard/AddCategory'
+import CategoryList from '@/components/adminDashboard/CategoryList'
 import React from 'react'
 
 export default function ManageCategories() {
     return (
-        <div className='p-6 border'>
+        <div className='p-6'>
 
             <h3 className="pb-5 text-3xl font-semibold">Manage Categories</h3>
             <div className='grid md:grid-cols-2'>
@@ -12,7 +13,8 @@ export default function ManageCategories() {
                     <AddCategory></AddCategory>
                 </div>
                 <div>
-                    <h5 className=' py-3 font-bold'>Update Category</h5>
+                    <h5 className=' py-3 font-bold'>Categories list</h5>
+                    <CategoryList></CategoryList>
                 </div>
             </div>
         </div>

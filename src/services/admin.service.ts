@@ -64,7 +64,6 @@ export const adminServices = {
     // Create Categories
     createCategories: async function (data: any) {
         const payload = data;
-        console.log(payload)
         try {
             const url = new URL(`${NEXT_PUBLIC}/categories`);
             const res = await fetch(url.toString(), {
@@ -80,6 +79,46 @@ export const adminServices = {
                 data: res,
                 status: true
             }
+        }
+        catch (err) {
+            return {
+                data: null,
+                error: { message: "Something Went Wrong" },
+            };
+        }
+    },
+
+    // Get all categories
+
+    getAllCategories: async function () {
+        try {
+            const url = new URL(`${API_URL}/categories`);
+            const res = await fetch(url.toString(), {
+                method: "GET",
+                credentials: "include"
+            });
+            const result = await res.json();
+            return result;
+        }
+        catch (err) {
+            return {
+                data: null,
+                error: { message: "Something Went Wrong" },
+            };
+        }
+    },
+
+    // Delete categories
+
+    deleteCategories: async function (id: string) {
+        try {
+            const url = new URL(`${NEXT_PUBLIC}/categories/${id}`);
+            const res = await fetch(url.toString(), {
+                method: "DELETE",
+                credentials: "include"
+            });
+            return res;
+
         }
         catch (err) {
             return {
