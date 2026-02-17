@@ -33,10 +33,11 @@ export const NavbarUser = ({ user }: { user: any }) => {
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <User />
-                    Profile
-                </DropdownMenuItem>
+                <Link href={`/profile`}>
+                    <DropdownMenuItem>
+                        <User />
+                        Profile
+                    </DropdownMenuItem></Link>
                 <DropdownMenuItem>
                     <Settings />
                     Settings
