@@ -12,8 +12,19 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Link from "next/link"
+import { authClient } from "@/lib/auth-client"
+import { useRouter } from "next/navigation"
 
 export const NavbarUser = ({ user }: { user: any }) => {
+
+    const router = useRouter();
+
+    const handelLogOut = async () => {
+        const result = await authClient.signOut();
+        if(result.data?.success === true){
+            router.push("/auth/login")
+        }
+    }
 
     return (
         <DropdownMenu>
@@ -48,7 +59,7 @@ export const NavbarUser = ({ user }: { user: any }) => {
                         Dashboard
                     </DropdownMenuItem></Link>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem variant="destructive">
+                <DropdownMenuItem onClick={()=> handelLogOut()} variant="destructive">
                     <LogOut />
                     Log out
                 </DropdownMenuItem>

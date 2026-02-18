@@ -14,8 +14,8 @@ type Provider = {
 
 export default function AllRestaurants({ providers }: { providers: Provider[] }) {
     return (
-        <div className="min-h-screen bg-gray-50 p-6 container mx-auto">
-            <img className="w-full rounded-2xl" src="https://static.vecteezy.com/system/resources/thumbnails/054/611/336/small/wide-angle-foodgraphy-for-restaurant-with-copy-space-photo.jpg" alt="" />
+        <div className=" bg-gray-50 p-6 container mx-auto">
+            {/* <img className="w-full rounded-2xl" src="https://static.vecteezy.com/system/resources/thumbnails/054/611/336/small/wide-angle-foodgraphy-for-restaurant-with-copy-space-photo.jpg" alt="" /> */}
             <h1 className="text-3xl font-bold my-8">
                 Flat 15% off entire menu
             </h1>
