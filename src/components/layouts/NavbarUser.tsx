@@ -23,6 +23,7 @@ export const NavbarUser = ({ user }: { user: any }) => {
         const result = await authClient.signOut();
         if(result.data?.success === true){
             router.push("/auth/login")
+            router.refresh();
         }
     }
 
@@ -32,7 +33,9 @@ export const NavbarUser = ({ user }: { user: any }) => {
                 <Button className="relative h-10 w-10 rounded-full cursor-pointer" variant="ghost">
                     <Avatar>
                         <AvatarImage alt="@haydenbleasel" src={`${user?.image}`} />
-                        <AvatarFallback>HB</AvatarFallback>
+                        <AvatarFallback>
+                            <img src="https://cdn-icons-png.flaticon.com/512/9385/9385289.png" alt="" />
+                        </AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>

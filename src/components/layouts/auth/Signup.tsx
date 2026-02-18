@@ -22,6 +22,7 @@ import { Roles } from "@/constants/role"
 import { authClient } from "@/lib/auth-client"
 import { useForm } from "@tanstack/react-form"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import * as z from "zod"
 
@@ -33,7 +34,7 @@ const formSchema = z.object({
 });
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-  // const router = useRouter();
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -50,17 +51,20 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       try {
         const { data, error } = await authClient.signUp.email(value);
 
+        console.log(data)
+
         if (error) {
           toast.error(error.message, { id: toastId });
           return;
         }
         toast.success("User Created Successfully", { id: toastId });
 
-        // if(data?.user?.role === Roles.provider){
-        //   router.replace("/")
-        // }else{
-        //   router.replace("/")
-        // }
+        if ((data?.user as any)?.role === Roles.provider) {
+          router.replace("/dashboard")
+          return;
+        } else {
+          router.replace("/")
+        }
 
 
       } catch (err) {

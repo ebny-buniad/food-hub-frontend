@@ -5,6 +5,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { Roles } from "@/constants/role";
 import { getUser } from "@/services/getUser";
 
 export default async function DashboardLayout({
@@ -35,7 +36,11 @@ export default async function DashboardLayout({
         </header>
         <div>
           {
-            userInfo.role === "ADMIN" ? admin : user
+            userInfo.role === Roles.admin
+              ? admin
+              : userInfo.role === Roles.provider
+                ? provider
+                : user
           }
         </div>
       </SidebarInset>
