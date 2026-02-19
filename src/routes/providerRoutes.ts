@@ -10,6 +10,10 @@ export const providerRoutes = [
                 title: "Orders",
                 url: "/dashboard/orders"
             },
+            {
+                title: "Create meal",
+                url: "/dashboard/create-meal"
+            },
         ]
     }
 ]
