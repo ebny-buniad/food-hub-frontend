@@ -69,9 +69,46 @@ export const providerServices = {
     },
 
     // Create meal
-    createMeal: async function () {
+    createNewMeal: async function (data: any) {
+        const payload = data;
         try {
+            const url = new URL(`${API_URL}/provider/meals`);
+            const res = await fetch(url.toString(), {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            return {
+                data: result,
+                success: true
+            }
+        }
+        catch (err) {
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
+    },
 
+
+
+
+
+
+
+
+
+
+
+
+    getCategories: async function () {
+        try {
+            const url = new URL(`${API_URL}/categories`);
+            const res = await fetch(url.toString());
+            const result = await res.json();
+            return result;
         }
         catch (err) {
             return { data: null, error: { message: "Something Went Wrong" } };

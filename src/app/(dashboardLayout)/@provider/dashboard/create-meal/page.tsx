@@ -3,12 +3,16 @@ import { providerServices } from '@/services/provider.service'
 import { userService } from '@/services/user.service'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import CreateNewMeal from '@/components/providerDashboard/CreateNewMeal'
 
 export default async function CreateMealPage() {
-  const cookie = await userService.getUserCookie()
+  const cookie = await userService.getUserCookie();
+
+  // Get categories
+  const categories = await providerServices.getCategories();
+
 
   let providerProfile: any = null
-
   try {
     providerProfile = await providerServices.getProviderProfile(cookie as string)
   } catch (error) {
@@ -57,11 +61,7 @@ export default async function CreateMealPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {/* Your CreateMealForm Component */}
-          {/* <CreateMealForm /> */}
-          <p className="text-sm text-muted-foreground">
-            Meal form will be rendered here.
-          </p>
+          <CreateNewMeal categories={categories}></CreateNewMeal>
         </CardContent>
       </Card>
     </div>
