@@ -1,7 +1,7 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const providerServices = {
-    createProviderProfile: async function (data: string) {
+    createProviderProfile: async function (data: any) {
         try {
             const payload = data;
             const url = new URL(`${API_URL}/provider/profile`);
@@ -15,7 +15,10 @@ export const providerServices = {
             });
 
             const result = await res.json();
-            return result;
+            return {
+                data: result,
+                success: true
+            };
         }
         catch (err) {
             return { data: null, error: { message: "Something Went Wrong" } };

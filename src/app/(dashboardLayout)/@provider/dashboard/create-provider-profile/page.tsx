@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import * as z from "zod"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { providerServices } from "@/services/provider.service";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     restaurentName: z.string().min(1, "Name field is required"),
@@ -28,9 +30,11 @@ export default function CreateProviderProfileForm() {
         },
         onSubmit: async ({ value }) => {
             try {
-                console.log("Provider Payload:", value);
-
-                form.reset();
+                const result = await providerServices.createProviderProfile(value);
+                if (result.success === true) {
+                    toast.success("Provider profile created")
+                    form.reset();
+                }
             } catch (error) {
                 console.error("Create Provider Failed:", error);
             }
