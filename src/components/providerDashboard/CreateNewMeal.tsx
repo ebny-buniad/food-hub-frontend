@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/field";
 import * as z from "zod"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { providerServices } from "@/services/provider.service";
+import { toast } from "sonner";
 
 type Category = {
   id: string;
@@ -40,9 +42,11 @@ export default function AddMealForm({ categories }: { categories: Category[] }) 
     },
     onSubmit: async ({ value }) => {
       try {
-        console.log("Meal Payload:", value);
-
-        form.reset();
+        const result = await providerServices.createNewMeal(value);
+        if(result?.success === true){
+          toast.success("Meal Created")
+           form.reset();
+        }
       } catch (error) {
         console.error("Create Meal Failed:", error);
       }
@@ -127,7 +131,8 @@ export default function AddMealForm({ categories }: { categories: Category[] }) 
                   <Field>
                     <FieldLabel htmlFor={field.name}>Price (৳)</FieldLabel>
                     <Input
-                      type="number"
+                      type="text"
+                      inputMode="numeric"
                       id={field.name}
                       name={field.name}
                       placeholder="Enter price"
