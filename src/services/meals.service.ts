@@ -12,6 +12,7 @@ interface ServiceOptions {
     revalidate?: number;
 }
 export const mealsServices = {
+    // Get all meals with filter
     getMeals: async function (
         params?: GetMealsParams,
         options?: ServiceOptions
@@ -44,6 +45,7 @@ export const mealsServices = {
         }
     },
 
+    // Get single meal by ID
     getMeal: async function (id: string) {
         try {
             const url = new URL(`${API_URL}/meals/${id}`);
@@ -74,16 +76,35 @@ export const mealsServices = {
         }
     },
 
-    // Delete meal (For Provider)
+    // Update meal (For provider)
+    updateMeal: async function (id: string, data: any) {
+        try {
+            const payload = data;
+            const url = new URL(`${NEXT_PUBLIC}/provider/meals/${id}`);
+            const res = await fetch(url.toString(), {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            return {
+                data: result,
+                success: true
+            }
+        }
+        catch (err) {
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
+    },
 
-    deleteMeal: async function (id: string, cookie: string) {
+    // Delete meal (For Provider)
+    deleteMeal: async function (id: string) {
         try {
             const url = new URL(`${NEXT_PUBLIC}/provider/meals/${id}`);
             const res = await fetch(url.toString(), {
-                method: "DELETE",
-                headers: {
-                    cookie: cookie
-                },
                 credentials: "include"
             })
             return {

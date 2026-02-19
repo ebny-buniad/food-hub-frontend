@@ -44,13 +44,12 @@ export default function ProviderMeals({ data, cookie }: { data: any, cookie: str
 
     const handleUpdate = (id?: string) => {
         if (!id) return;
-        console.log("Update meal:", id);
-        // router.push(`/dashboard/meals/update/${id}`)
+        router.push(`/dashboard/update-meal/${id}`)
     };
 
     const handleDelete = async (id?: string) => {
         if (!id) return;
-        const result = await mealsServices.deleteMeal(id, cookie);
+        const result = await mealsServices.deleteMeal(id);
         if (result?.success === true) {
             toast.success("Meal delete!");
             router.refresh();
