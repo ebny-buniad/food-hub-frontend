@@ -1,4 +1,5 @@
 const API_URL = process.env.API_URL
+const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 interface GetMealsParams {
     dietary?: string,
@@ -71,5 +72,29 @@ export const mealsServices = {
         catch (err) {
             return { data: null, error: { message: "Something Went Wrong" } };
         }
+    },
+
+    // Delete meal (For Provider)
+
+    deleteMeal: async function (id: string, cookie: string) {
+        try {
+            const url = new URL(`${NEXT_PUBLIC}/provider/meals/${id}`);
+            const res = await fetch(url.toString(), {
+                method: "DELETE",
+                headers: {
+                    cookie: cookie
+                },
+                credentials: "include"
+            })
+            return {
+                data: res,
+                success: true
+            }
+        }
+        catch (err) {
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
     }
+
+
 }

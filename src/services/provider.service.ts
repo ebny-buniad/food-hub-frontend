@@ -56,10 +56,17 @@ export const providerServices = {
         }
     },
 
-    getProvider: async function (id: string) {
+    // Get provider provider with provider meals (Update, delete operation)
+    getProviderMeals: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/providers/${id}`);
-            const res = await fetch(url.toString());
+            const url = new URL(`${API_URL}/provider/meals`);
+            const res = await fetch(url.toString(), {
+                method: "GET",
+                headers: {
+                    cookie: cookie
+                },
+                credentials: "include"
+            });
             const result = await res.json();
             return result;
         }
