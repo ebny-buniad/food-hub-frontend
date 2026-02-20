@@ -41,16 +41,14 @@ type Order = {
 };
 
 export default function OrdersTable({ orders }: { orders: Order[] }) {
-
     const router = useRouter();
-
     const handleStatusChange = async (orderId: string, status: string) => {
         const result = await providerServices.updateOrderStatus(orderId, status);
         if (result?.success === true) {
-            toast.success(`Order ${status.toLocaleLowerCase()}`)
+            toast.success(`Order ${status.toLocaleLowerCase()}`);
+            router.refresh();
         }
     };
-
     const getStatusVariant = (status: string) => {
         if (status === Status.delivered) return "default";
         if (status === Status.canceled) return "destructive";
