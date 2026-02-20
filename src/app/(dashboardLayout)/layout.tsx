@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Roles } from "@/constants/role";
 import { getUser } from "@/services/getUser";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
   user,
@@ -19,6 +20,10 @@ export default async function DashboardLayout({
 }) {
 
   const currentUser = await getUser();
+  if (!currentUser) {
+    redirect("/auth/login");
+  }
+
   const userInfo = {
     role: currentUser?.role
   }
