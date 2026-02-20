@@ -38,6 +38,7 @@ export const providerServices = {
         }
     },
 
+
     getProviderProfile: async function (cookie: string) {
         try {
             const url = new URL(`${API_URL}/provider/profile`);
@@ -99,23 +100,31 @@ export const providerServices = {
         }
     },
 
-
-
-
-
-
-
-
-
-
-
-
     getCategories: async function () {
         try {
             const url = new URL(`${API_URL}/categories`);
             const res = await fetch(url.toString());
             const result = await res.json();
             return result;
+        }
+        catch (err) {
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
+    },
+
+    // Get provider orders
+    getProviderOrders: async function (cookie: string) {
+        try {
+            const url = new URL(`${API_URL}/provider/orders`);
+            const res  = await fetch(url.toString(), {
+                method: "GET",
+                headers: {
+                    cookie: cookie
+                },
+                credentials: "include"
+            });
+            const result = await res.json();
+            return result
         }
         catch (err) {
             return { data: null, error: { message: "Something Went Wrong" } };

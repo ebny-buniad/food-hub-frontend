@@ -28,17 +28,13 @@ const mealSchema = z.object({
     dietary: z.string().min(1, "Dietary is required"),
 });
 
-
 type Props = {
     mealInfo: any;
     categories: any[];
 };
 
 
-
 export default function UpdateMealInfo({ mealInfo, categories }: Props) {
-
-    console.log(mealInfo?.id)
 
     const form = useForm({
         defaultValues: {
