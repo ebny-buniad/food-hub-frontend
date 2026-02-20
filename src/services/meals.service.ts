@@ -1,4 +1,3 @@
-const API_URL = process.env.API_URL
 const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 interface GetMealsParams {
@@ -18,7 +17,7 @@ export const mealsServices = {
         options?: ServiceOptions
     ) {
         try {
-            const url = new URL(`${API_URL}/meals`);
+            const url = new URL(`${NEXT_PUBLIC}/meals`);
             if (params) {
                 Object.entries(params).forEach(([key, value]) => {
                     if (value !== undefined && value !== null && value !== "") {
@@ -48,7 +47,7 @@ export const mealsServices = {
     // Get single meal by ID
     getMeal: async function (id: string) {
         try {
-            const url = new URL(`${API_URL}/meals/${id}`);
+            const url = new URL(`${NEXT_PUBLIC}/meals/${id}`);
             const res = await fetch(url.toString());
             const data = await res.json();
             return {
@@ -63,7 +62,7 @@ export const mealsServices = {
 
     getCategories: async function () {
         try {
-            const url = new URL(`${API_URL}/categories`);
+            const url = new URL(`${NEXT_PUBLIC}/categories`);
             const res = await fetch(url.toString());
             const data = await res.json();
             return {

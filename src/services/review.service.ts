@@ -1,11 +1,11 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const reviewServices = {
 
     // Create review
     createReview: async function (data: any) {
         try {
-            const url = new URL(`${API_URL}/reviews`)
+            const url = new URL(`${NEXT_PUBLIC}/reviews`)
             const payload = data;
             const res = await fetch(url.toString(), {
                 method: "POST",
@@ -27,7 +27,7 @@ export const reviewServices = {
 
     getReviews: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/my-reviews`);
+            const url = new URL(`${NEXT_PUBLIC}/my-reviews`);
             const res = fetch(url.toString(), {
                 method: "GET",
                 headers: {

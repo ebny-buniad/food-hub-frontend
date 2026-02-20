@@ -1,11 +1,10 @@
-const API_URL = process.env.API_URL;
 const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const adminServices = {
     // Get all users
     getAllUsers: async (cookie: string) => {
         try {
-            const res = await fetch(`${API_URL}/admin/users`, {
+            const res = await fetch(`${NEXT_PUBLIC}/admin/users`, {
                 method: "GET",
                 headers: {
                     cookie: cookie,
@@ -42,7 +41,7 @@ export const adminServices = {
     // Get all orders
     getAllOrders: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/admin/orders`);
+            const url = new URL(`${NEXT_PUBLIC}/admin/orders`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {
@@ -92,7 +91,7 @@ export const adminServices = {
 
     getAllCategories: async function () {
         try {
-            const url = new URL(`${API_URL}/categories`);
+            const url = new URL(`${NEXT_PUBLIC}/categories`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 credentials: "include"
@@ -132,7 +131,7 @@ export const adminServices = {
 
     getAdminStats: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/admin-stats`);
+            const url = new URL(`${NEXT_PUBLIC}/admin-stats`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {

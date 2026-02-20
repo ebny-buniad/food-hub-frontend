@@ -1,10 +1,10 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const providerServices = {
     createProviderProfile: async function (data: any) {
         try {
             const payload = data;
-            const url = new URL(`${API_URL}/provider/profile`);
+            const url = new URL(`${NEXT_PUBLIC}/provider/profile`);
             const res = await fetch(url.toString(), {
                 method: "POST",
                 headers: {
@@ -28,7 +28,7 @@ export const providerServices = {
     // Get all providers
     getAllProviders: async function () {
         try {
-            const url = new URL(`${API_URL}/providers`);
+            const url = new URL(`${NEXT_PUBLIC}/providers`);
             const res = await fetch(url.toString());
             const result = await res.json();
             return result;
@@ -41,7 +41,7 @@ export const providerServices = {
 
     getProviderProfile: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/provider/profile`);
+            const url = new URL(`${NEXT_PUBLIC}/provider/profile`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {
@@ -60,7 +60,7 @@ export const providerServices = {
     // Get provider provider with provider meals (Update, delete operation)
     getProviderMeals: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/provider/meals`);
+            const url = new URL(`${NEXT_PUBLIC}/provider/meals`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {
@@ -80,7 +80,7 @@ export const providerServices = {
     createNewMeal: async function (data: any) {
         const payload = data;
         try {
-            const url = new URL(`${API_URL}/provider/meals`);
+            const url = new URL(`${NEXT_PUBLIC}/provider/meals`);
             const res = await fetch(url.toString(), {
                 method: "POST",
                 credentials: "include",
@@ -102,7 +102,7 @@ export const providerServices = {
 
     getCategories: async function () {
         try {
-            const url = new URL(`${API_URL}/categories`);
+            const url = new URL(`${NEXT_PUBLIC}/categories`);
             const res = await fetch(url.toString());
             const result = await res.json();
             return result;
@@ -115,7 +115,7 @@ export const providerServices = {
     // Get provider orders
     getProviderOrders: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/provider/orders`);
+            const url = new URL(`${NEXT_PUBLIC}/provider/orders`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {
@@ -137,7 +137,7 @@ export const providerServices = {
         try {
             const paylaod = { status: status }
             console.log(paylaod)
-            const url = new URL(`${API_URL}/provider/orders/status/${orderId}`);
+            const url = new URL(`${NEXT_PUBLIC}/provider/orders/status/${orderId}`);
             const res = await fetch(url.toString(), {
                 method: "PATCH",
                 headers: {
@@ -160,7 +160,7 @@ export const providerServices = {
     // Get provider stats
     getProviderStats: async function (cookie: string) {
         try {
-            const url = new URL(`${API_URL}/provider/stats`);
+            const url = new URL(`${NEXT_PUBLIC}/provider/stats`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {

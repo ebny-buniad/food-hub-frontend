@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const cartServices = {
 
@@ -8,7 +8,7 @@ export const cartServices = {
         try {
             const payload = data;
             // API call here
-            const url = new URL(`${API_URL}/cart`);
+            const url = new URL(`${NEXT_PUBLIC}/cart`);
             const res = await fetch(url.toString(), {
                 method: "POST",
                 headers: {
@@ -32,7 +32,7 @@ export const cartServices = {
     // Get user active cart
     getCart: async function (cookieHeader: any) {
         try {
-            const url = new URL(`${API_URL}/cart`);
+            const url = new URL(`${NEXT_PUBLIC}/cart`);
             const res = await fetch(url.toString(), {
                 headers: {
                     cookie: cookieHeader
@@ -48,7 +48,7 @@ export const cartServices = {
     // Delete cart items
     deleteCart: async function (id: string) {
         try {
-            const url = new URL(`${API_URL}/cart/${id}`);
+            const url = new URL(`${NEXT_PUBLIC}/cart/${id}`);
             const res = await fetch(url, {
                 method: "DELETE",
                 credentials: "include",

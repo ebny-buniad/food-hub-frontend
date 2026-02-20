@@ -1,11 +1,11 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const orderServices = {
     // Create customer orders
     createOrder: async function (data: any) {
         try {
             const payload = data;
-            const url = new URL(`${API_URL}/orders`);
+            const url = new URL(`${NEXT_PUBLIC}/orders`);
             const res = await fetch(url.toString(), {
                 method: "POST",
                 headers: {
@@ -29,7 +29,7 @@ export const orderServices = {
     // Get user orders
     getOrders: async function (cookieHeader: string) {
         try {
-            const url = new URL(`${API_URL}/orders`);
+            const url = new URL(`${NEXT_PUBLIC}/orders`);
             const res = await fetch(url.toString(), {
                 headers: {
                     cookie: cookieHeader
@@ -49,7 +49,7 @@ export const orderServices = {
     // Update 
     updateOrderStatus: async function (orderId: string) {
         try {
-            const url = new URL(`${API_URL}/orders/${orderId}`);
+            const url = new URL(`${NEXT_PUBLIC}/orders/${orderId}`);
             const res = await fetch(url.toString(), {
                 method: "PATCH",
                 credentials: "include"
