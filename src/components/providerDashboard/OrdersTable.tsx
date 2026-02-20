@@ -18,6 +18,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { Status } from "@/constants/status";
+import { providerServices } from "@/services/provider.service";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 type Order = {
     id: string;
@@ -38,11 +41,14 @@ type Order = {
 };
 
 export default function OrdersTable({ orders }: { orders: Order[] }) {
-    const handleStatusChange = (orderId: string, status: string) => {
-        console.log("Update Order Status:", { orderId, status });
 
-        // TODO: API call later
-        // await updateOrderStatus(orderId, status)
+    const router = useRouter();
+
+    const handleStatusChange = async (orderId: string, status: string) => {
+        const result = await providerServices.updateOrderStatus(orderId, status);
+        if (result?.success === true) {
+            toast.success(`Order ${status.toLocaleLowerCase()}`)
+        }
     };
 
     const getStatusVariant = (status: string) => {
