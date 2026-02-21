@@ -32,7 +32,7 @@ export const NavbarUser = ({ user }: { user: any }) => {
             <DropdownMenuTrigger asChild>
                 <Button className="relative h-10 w-10 rounded-full cursor-pointer" variant="ghost">
                     <Avatar>
-                        <AvatarImage alt="@haydenbleasel" src={`${user?.image}`} />
+                        <AvatarImage alt="@haydenbleasel" src={`${user?.image || "https://cdn-icons-png.flaticon.com/512/9385/9385289.png"}`} />
                         <AvatarFallback>
                             <img src="https://cdn-icons-png.flaticon.com/512/9385/9385289.png" alt="" />
                         </AvatarFallback>

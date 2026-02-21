@@ -61,9 +61,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
         if ((data?.user as any)?.role === Roles.provider) {
           router.replace("/dashboard")
+          router.refresh()
           return;
         } else {
-          router.replace("/")
+          router.replace("/");
+          router.refresh();
         }
 
 

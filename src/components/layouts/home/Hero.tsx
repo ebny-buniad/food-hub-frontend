@@ -22,6 +22,7 @@ export default function Hero() {
                         src="https://i.ibb.co/Wpgv0L25/hero-2.webp"
                         alt="Food Hub Hero Image"
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-contain"
                         priority
                     />

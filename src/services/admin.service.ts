@@ -1,10 +1,10 @@
-const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
+const API = process.env.NEXT_PUBLIC_API_URL;
 
 export const adminServices = {
     // Get all users
     getAllUsers: async (cookie: string) => {
         try {
-            const res = await fetch(`${NEXT_PUBLIC}/admin/users`, {
+            const res = await fetch(`${API}/admin/users`, {
                 method: "GET",
                 headers: {
                     cookie: cookie,
@@ -23,7 +23,7 @@ export const adminServices = {
     // Update user status
     updateUserStatus: async function (id: string) {
         try {
-            const url = new URL(`${NEXT_PUBLIC}/admin/users/status/${id}`);
+            const url = new URL(`${API}/admin/users/status/${id}`);
             const res = await fetch(url.toString(), {
                 method: "PATCH",
                 credentials: "include"
@@ -41,7 +41,7 @@ export const adminServices = {
     // Get all orders
     getAllOrders: async function (cookie: string) {
         try {
-            const url = new URL(`${NEXT_PUBLIC}/admin/orders`);
+            const url = new URL(`${API}/admin/orders`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {
@@ -64,7 +64,7 @@ export const adminServices = {
     createCategories: async function (data: any) {
         const payload = data;
         try {
-            const url = new URL(`${NEXT_PUBLIC}/categories`);
+            const url = new URL(`${API}/categories`);
             const res = await fetch(url.toString(), {
                 method: "POST",
                 headers: {
@@ -91,7 +91,7 @@ export const adminServices = {
 
     getAllCategories: async function () {
         try {
-            const url = new URL(`${NEXT_PUBLIC}/categories`);
+            const url = new URL(`${API}/categories`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 credentials: "include"
@@ -111,7 +111,7 @@ export const adminServices = {
 
     deleteCategories: async function (id: string) {
         try {
-            const url = new URL(`${NEXT_PUBLIC}/categories/${id}`);
+            const url = new URL(`${API}/categories/${id}`);
             const res = await fetch(url.toString(), {
                 method: "DELETE",
                 credentials: "include"
@@ -131,7 +131,7 @@ export const adminServices = {
 
     getAdminStats: async function (cookie: string) {
         try {
-            const url = new URL(`${NEXT_PUBLIC}/admin-stats`);
+            const url = new URL(`${API}/admin-stats`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {

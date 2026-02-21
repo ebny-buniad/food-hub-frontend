@@ -7,14 +7,21 @@ import { Badge } from '../ui/badge'
 import { OrderItem } from '@/types';
 import { orderServices } from '@/services/order.service'
 import { useRouter } from 'next/navigation'
+import { cancelMyOrder } from '@/app/actions/cancleOrder'
 
 export default function UserOrdersList({ orderItems }: any) {
     const router = useRouter();
     const items = orderItems?.data;
+
+
     const handelCancleOrder = async (id: string) => {
-        await orderServices?.updateOrderStatus(id);
+        console.log("CLIENT ID:", id); // first debug
+        const res = await cancelMyOrder(id);
+        console.log("ACTION RESPONSE:", res);
         router.refresh();
-    }
+    };
+
+
 
     return (
         <div className="px-4 space-y-10">
