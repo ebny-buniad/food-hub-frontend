@@ -16,19 +16,15 @@ import { adminServices } from "@/services/admin.service"
 import { toast } from "sonner"
 
 export default function DeleteCategories({ categories }: { categories: any }) {
-
     const router = useRouter();
-
     const handleDelete = async (id: string) => {
         try {
             const result = await adminServices.deleteCategories(id)
             router.refresh();
-
         } catch (error) {
             toast.error("Something went wrong!")
         }
     }
-
     if (!categories?.length) {
         return (
             <div className="text-center py-10 text-muted-foreground">

@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { adminServices } from "@/services/admin.service"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { createCategories } from "@/app/actions/adminActions"
 
 const categorySchema = z.object({
     cuisine: z
@@ -18,7 +19,6 @@ const categorySchema = z.object({
 })
 
 export default function AddCategory() {
-
     const router = useRouter();
     const form = useForm({
         defaultValues: {
@@ -26,7 +26,7 @@ export default function AddCategory() {
         },
         // validators: categorySchema,
         onSubmit: async ({ value }) => {
-            const result = await adminServices.createCategories(value);
+            const result = await createCategories(value);
             if (result?.data?.ok === true) {
                 toast.success("Ctegory created!");
                 form.reset();

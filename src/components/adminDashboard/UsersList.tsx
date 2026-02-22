@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { adminServices } from "@/services/admin.service"
 import { useRouter } from "next/navigation"
+import { updateUserStatus } from "@/app/actions/adminActions"
 
 type User = {
     id: string
@@ -31,7 +32,7 @@ export default function UsersList({ users }: { users: User[] }) {
     const router = useRouter();
 
     const handleStatusToggle = async (id: string) => {
-        await adminServices.updateUserStatus(id);
+        await updateUserStatus(id);
         router.refresh();
     }
 

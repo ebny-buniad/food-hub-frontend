@@ -1,94 +1,7 @@
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export const adminServices = {
-    // Get all users
-    getAllUsers: async (cookie: string) => {
-        try {
-            const res = await fetch(`${API}/admin/users`, {
-                method: "GET",
-                headers: {
-                    cookie: cookie,
-                },
-                credentials: "include",
-            });
-            return await res.json();
-        } catch (err) {
-            return {
-                data: null,
-                error: { message: "Something Went Wrong" },
-            };
-        }
-    },
-
-    // Update user status
-    updateUserStatus: async function (id: string) {
-        try {
-            const url = new URL(`${API}/admin/users/status/${id}`);
-            const res = await fetch(url.toString(), {
-                method: "PATCH",
-                credentials: "include"
-            })
-            return res;
-        }
-        catch (err) {
-            return {
-                data: null,
-                error: { message: "Something Went Wrong" },
-            };
-        }
-    },
-
-    // Get all orders
-    getAllOrders: async function (cookie: string) {
-        try {
-            const url = new URL(`${API}/admin/orders`);
-            const res = await fetch(url.toString(), {
-                method: "GET",
-                headers: {
-                    cookie: cookie
-                },
-                credentials: "include"
-            });
-            const result = await res.json();
-            return result;
-        }
-        catch (err) {
-            return {
-                data: null,
-                error: { message: "Something Went Wrong" },
-            };
-        }
-    },
-
-    // Create Categories
-    createCategories: async function (data: any) {
-        const payload = data;
-        try {
-            const url = new URL(`${API}/categories`);
-            const res = await fetch(url.toString(), {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                credentials: "include",
-                body: JSON.stringify(payload)
-            });
-
-            return {
-                data: res,
-                status: true
-            }
-        }
-        catch (err) {
-            return {
-                data: null,
-                error: { message: "Something Went Wrong" },
-            };
-        }
-    },
-
     // Get all categories
-
     getAllCategories: async function () {
         try {
             const url = new URL(`${API}/categories`);
@@ -108,7 +21,6 @@ export const adminServices = {
     },
 
     // Delete categories
-
     deleteCategories: async function (id: string) {
         try {
             const url = new URL(`${API}/categories/${id}`);
@@ -118,30 +30,6 @@ export const adminServices = {
             });
             return res;
 
-        }
-        catch (err) {
-            return {
-                data: null,
-                error: { message: "Something Went Wrong" },
-            };
-        }
-    },
-
-    // Get admin stats
-
-    getAdminStats: async function (cookie: string) {
-        try {
-            const url = new URL(`${API}/admin-stats`);
-            const res = await fetch(url.toString(), {
-                method: "GET",
-                headers: {
-                    cookie: cookie
-                },
-                credentials: "include"
-            })
-
-            const result = await res.json();
-            return result;
         }
         catch (err) {
             return {

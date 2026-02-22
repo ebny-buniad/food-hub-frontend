@@ -1,10 +1,8 @@
+import { getAllOrders } from '@/app/actions/adminActions';
 import OrdersTable from '@/components/adminDashboard/OrdersTable';
-import { adminServices } from '@/services/admin.service';
-import { userService } from '@/services/user.service'
 
 export default async function AllOrders() {
-    const cookie = await userService.getUserCookie();
-    const orders = await adminServices.getAllOrders(cookie as string);
+    const orders = await getAllOrders();
 
     return (
         <div>

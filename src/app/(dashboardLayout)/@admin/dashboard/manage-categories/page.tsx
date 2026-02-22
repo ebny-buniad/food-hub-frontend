@@ -1,6 +1,5 @@
 import AddCategory from '@/components/adminDashboard/AddCategory'
 import CategoryList from '@/components/adminDashboard/CategoryList'
-import React from 'react'
 
 export default function ManageCategories() {
     return (
