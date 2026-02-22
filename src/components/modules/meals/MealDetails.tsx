@@ -1,12 +1,11 @@
 "use client"
+import { createReview } from "@/app/actions/createReview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { FieldError } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
-import { reviewServices } from "@/services/review.service";
 import { Review } from "@/types";
 import { useForm } from "@tanstack/react-form";
 import { Star } from "lucide-react";
@@ -46,7 +45,7 @@ export function MealDetails({ meal }: { meal: any }) {
                 mealId: id,
                 ...value
             }
-            await reviewServices.createReview(reviewInfo);
+            await createReview(reviewInfo)
             router.refresh();
         },
     })

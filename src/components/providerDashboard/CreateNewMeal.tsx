@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/field";
 import * as z from "zod"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { providerServices } from "@/services/provider.service";
 import { toast } from "sonner";
+import { createNewMeal } from "@/app/actions/providerActions";
 
 type Category = {
   id: string;
@@ -42,10 +42,10 @@ export default function AddMealForm({ categories }: { categories: Category[] }) 
     },
     onSubmit: async ({ value }) => {
       try {
-        const result = await providerServices.createNewMeal(value);
-        if(result?.success === true){
+        const result = await createNewMeal(value);
+        if (result?.success === true) {
           toast.success("Meal Created")
-           form.reset();
+          form.reset();
         }
       } catch (error) {
         console.error("Create Meal Failed:", error);

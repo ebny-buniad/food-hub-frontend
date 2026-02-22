@@ -13,16 +13,11 @@ export default function UserOrdersList({ orderItems }: any) {
     const router = useRouter();
     const items = orderItems?.data;
 
-
     const handelCancleOrder = async (id: string) => {
-        console.log("CLIENT ID:", id); // first debug
         const res = await cancelMyOrder(id);
-        console.log("ACTION RESPONSE:", res);
         router.refresh();
     };
-
-
-
+    
     return (
         <div className="px-4 space-y-10">
             {/* Header */}

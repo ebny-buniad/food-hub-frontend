@@ -1,5 +1,4 @@
 "use client";
-
 import {
     Table,
     TableBody,
@@ -18,9 +17,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { Status } from "@/constants/status";
-import { providerServices } from "@/services/provider.service";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { updateOrderStatus } from "@/app/actions/providerActions";
 
 type Order = {
     id: string;
@@ -43,7 +42,7 @@ type Order = {
 export default function OrdersTable({ orders }: { orders: Order[] }) {
     const router = useRouter();
     const handleStatusChange = async (orderId: string, status: string) => {
-        const result = await providerServices.updateOrderStatus(orderId, status);
+        const result = await updateOrderStatus(orderId, status);
         if (result?.success === true) {
             toast.success(`Order ${status.toLocaleLowerCase()}`);
             router.refresh();

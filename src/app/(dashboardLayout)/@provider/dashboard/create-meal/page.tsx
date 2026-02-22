@@ -1,20 +1,18 @@
 import Link from 'next/link'
 import { providerServices } from '@/services/provider.service'
-import { userService } from '@/services/user.service'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import CreateNewMeal from '@/components/providerDashboard/CreateNewMeal'
+import { getProviderProfile } from '@/app/actions/providerActions'
 
 export default async function CreateMealPage() {
-  const cookie = await userService.getUserCookie();
 
   // Get categories
   const categories = await providerServices.getCategories();
 
-
   let providerProfile: any = null
   try {
-    providerProfile = await providerServices.getProviderProfile(cookie as string)
+    providerProfile = await getProviderProfile()
   } catch (error) {
     providerProfile = null
   }

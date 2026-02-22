@@ -1,39 +1,18 @@
+import { cookies } from "next/headers";
 const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
-
 export const reviewServices = {
-
-    // Create review
-    createReview: async function (data: any) {
-        try {
-            const url = new URL(`${NEXT_PUBLIC}/reviews`)
-            const payload = data;
-            const res = await fetch(url.toString(), {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                credentials: "include",
-                body: JSON.stringify(payload)
-            });
-            const result = await res.json();
-            return result;
-        }
-        catch (err) {
-            return { data: null, error: { message: "Something Went Wrong" } };
-        }
-    },
-
     // Get user reviews
-
-    getReviews: async function (cookie: string) {
+    getReviews: async function () {
+        const cookieStore = await cookies();
         try {
             const url = new URL(`${NEXT_PUBLIC}/my-reviews`);
             const res = fetch(url.toString(), {
                 method: "GET",
                 headers: {
-                    cookie: cookie
+                    cookie: cookieStore.toString()
                 },
-                credentials: "include"
+                credentials: "include",
+                cache: "no-store",
             })
             const result = (await res).json();
             return result;

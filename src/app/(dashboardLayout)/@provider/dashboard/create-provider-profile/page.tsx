@@ -9,6 +9,7 @@ import * as z from "zod"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { providerServices } from "@/services/provider.service";
 import { toast } from "sonner";
+import { createProviderProfile } from "@/app/actions/providerActions";
 
 const formSchema = z.object({
     restaurentName: z.string().min(1, "Name field is required"),
@@ -30,7 +31,7 @@ export default function CreateProviderProfileForm() {
         },
         onSubmit: async ({ value }) => {
             try {
-                const result = await providerServices.createProviderProfile(value);
+                const result = await createProviderProfile(value);
                 if (result.success === true) {
                     toast.success("Provider profile created")
                     form.reset();

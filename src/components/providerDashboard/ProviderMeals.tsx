@@ -1,6 +1,5 @@
 "use client"
 
-import React from 'react'
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
@@ -24,7 +23,7 @@ type Meal = {
     reviews?: any[];
 };
 
-export default function ProviderMeals({ data, cookie }: { data: any, cookie: string }) {
+export default function ProviderMeals({ data }: { data: any }) {
 
     const router = useRouter();
 

@@ -1,5 +1,6 @@
 "use client"
 
+import { createOrder } from '@/app/actions/createOrder';
 import { Button } from '@/components/ui/button';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
@@ -51,7 +52,7 @@ export default function CartItems({ items }: { items: Cart[] }) {
         ...payload
       }
       try {
-        const result = await orderServices.createOrder(orderDetails);
+        const result = await createOrder(orderDetails);
         if (result.success === true) {
           toast.success("Your order has been placed!")
         }

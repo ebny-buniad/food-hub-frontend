@@ -1,4 +1,5 @@
 "use client"
+import { createCart } from "@/app/actions/createCart";
 import { cartServices } from "@/services/cart.service";
 import { Meal } from "@/types";
 import Link from "next/link";
@@ -30,7 +31,7 @@ export function MealCard({ meal }: { meal: Meal }) {
         mealId: id,
         quantity: quantity
       }
-      const { data, error } = await cartServices.createCart(items)
+      const { data, error } = await createCart(items);
       if (error) {
         toast.error(error.message);
         return;
