@@ -12,15 +12,18 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
-import { adminServices } from "@/services/admin.service"
 import { toast } from "sonner"
+import { deleteCategories } from "@/app/actions/adminActions"
 
 export default function DeleteCategories({ categories }: { categories: any }) {
     const router = useRouter();
     const handleDelete = async (id: string) => {
         try {
-            const result = await adminServices.deleteCategories(id)
-            router.refresh();
+            const result = await deleteCategories(id)
+            if (result.success === true) {
+                toast.success("Category delete!")
+                router.refresh();
+            }
         } catch (error) {
             toast.error("Something went wrong!")
         }

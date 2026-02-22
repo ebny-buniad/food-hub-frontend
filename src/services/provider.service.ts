@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const providerServices = {
-
     // Get all providers
     getAllProviders: async function () {
         try {

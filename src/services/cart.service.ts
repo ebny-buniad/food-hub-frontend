@@ -1,7 +1,6 @@
 const NEXT_PUBLIC = process.env.NEXT_PUBLIC_API_URL;
 
 export const cartServices = {
-    
     // Delete cart items
     deleteCart: async function (id: string) {
         try {
@@ -11,8 +10,9 @@ export const cartServices = {
                 credentials: "include",
                 cache: "no-store"
             })
+            const result = await res.json();
             return {
-                res,
+                result,
                 seccess: true
             }
         }

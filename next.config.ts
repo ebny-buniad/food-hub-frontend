@@ -10,14 +10,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // rewrites() {
-  //   return [
-  //     {
-  //       source: "/api/:path*",
-  //       destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`
-  //     }
-  //   ]
-  // }
+  rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`
+      }
+    ]
+  }
 };
 
 export default nextConfig;

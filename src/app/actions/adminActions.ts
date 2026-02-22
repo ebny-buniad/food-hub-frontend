@@ -1,7 +1,6 @@
 "use server"
 
 import { cookies } from "next/headers";
-
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 // Get all user
@@ -15,7 +14,8 @@ export async function getAllUsers() {
             },
             credentials: "include",
         });
-        return await res.json();
+        const result = await res.json();
+        return result;
     } catch (err) {
         return {
             data: null,
@@ -86,8 +86,10 @@ export async function createCategories(data: any) {
             body: JSON.stringify(payload)
         });
 
+        const result = await res.json()
+
         return {
-            data: res,
+            data: result,
             status: true
         }
     }
@@ -115,6 +117,32 @@ export async function getAdminStats() {
 
         const result = await res.json();
         return result;
+    }
+    catch (err) {
+        return {
+            data: null,
+            error: { message: "Something Went Wrong" },
+        };
+    }
+}
+
+// Delete categories
+export async function deleteCategories(id: string) {
+    try {
+        const cookieStore = await cookies();
+        const url = new URL(`${API}/categories/${id}`);
+        const res = await fetch(url.toString(), {
+            method: "DELETE",
+            headers: {
+                cookie: cookieStore.toString()
+            },
+            credentials: "include"
+        });
+        const result = await res.json();
+        return {
+            data: result,
+            success: true
+        };
     }
     catch (err) {
         return {

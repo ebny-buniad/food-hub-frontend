@@ -18,25 +18,5 @@ export const adminServices = {
                 error: { message: "Something Went Wrong" },
             };
         }
-    },
-
-    // Delete categories
-    deleteCategories: async function (id: string) {
-        try {
-            const url = new URL(`${API}/categories/${id}`);
-            const res = await fetch(url.toString(), {
-                method: "DELETE",
-                credentials: "include"
-            });
-            return res;
-
-        }
-        catch (err) {
-            return {
-                data: null,
-                error: { message: "Something Went Wrong" },
-            };
-        }
     }
-
 }
