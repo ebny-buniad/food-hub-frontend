@@ -99,25 +99,6 @@ export async function createNewMeal(data: any) {
     }
 }
 
-// Get provider orders
-// export async function getProviderOrders() {
-//     try {
-//         const cookieStore = await cookies();
-//         const url = new URL(`${NEXT_PUBLIC}/provider/orders`);
-//         const res = await fetch(url.toString(), {
-//             method: "GET",
-//             headers: {
-//                 cookie: cookieStore.toString()
-//             },
-//             credentials: "include"
-//         });
-//         const result = await res.json();
-//         return result
-//     }
-//     catch (err) {
-//         return { data: null, error: { message: "Something Went Wrong" } };
-//     }
-// }
 
 // Update order status
 export async function updateOrderStatus(orderId: string, status: string) {

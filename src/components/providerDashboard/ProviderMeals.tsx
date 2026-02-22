@@ -4,10 +4,10 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import Image from 'next/image';
-import { Badge, Pencil, Trash2 } from 'lucide-react';
-import { mealsServices } from '@/services/meals.service';
+import {  Pencil, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { deleteMeal } from '@/app/actions/mealsActions';
 
 type Meal = {
     id: string;
@@ -24,9 +24,8 @@ type Meal = {
 };
 
 export default function ProviderMeals({ data }: { data: any }) {
-
     const router = useRouter();
-
+    // Error message if no meals
     const meals = data?.meals;
     if (!meals.length) {
         return (
@@ -39,22 +38,22 @@ export default function ProviderMeals({ data }: { data: any }) {
             </div>
         )
     }
-
-
+    // Update meal info
     const handleUpdate = (id?: string) => {
         if (!id) return;
         router.push(`/dashboard/update-meal/${id}`)
     };
-
+    // Delete meal
     const handleDelete = async (id?: string) => {
         if (!id) return;
-        const result = await mealsServices.deleteMeal(id);
+        const result = await deleteMeal(id);
         if (result?.success === true) {
             toast.success("Meal delete!");
             router.refresh();
+        }else if(result?.success === false){
+            toast.error("Customer order this item.")
         }
     };
-
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5 gap-6 p-4">
             {meals?.map((meal: Meal) => (

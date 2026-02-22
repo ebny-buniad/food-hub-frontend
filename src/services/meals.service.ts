@@ -43,7 +43,6 @@ export const mealsServices = {
             return { data: null, error: { message: "Something Went Wrong" } };
         }
     },
-
     // Get single meal by ID
     getMeal: async function (id: string) {
         try {
@@ -59,7 +58,7 @@ export const mealsServices = {
             return { data: null, error: { message: "Something Went Wrong" } };
         }
     },
-
+    // Get all categories for filter items or meals
     getCategories: async function () {
         try {
             const url = new URL(`${NEXT_PUBLIC}/categories`);
@@ -73,48 +72,5 @@ export const mealsServices = {
         catch (err) {
             return { data: null, error: { message: "Something Went Wrong" } };
         }
-    },
-
-    // Update meal (For provider)
-    updateMeal: async function (id: string, data: any) {
-        try {
-            const payload = data;
-            const url = new URL(`${NEXT_PUBLIC}/provider/meals/${id}`);
-            const res = await fetch(url.toString(), {
-                method: "PUT",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                credentials: "include",
-                body: JSON.stringify(payload)
-            });
-            const result = await res.json();
-            return {
-                data: result,
-                success: true
-            }
-        }
-        catch (err) {
-            return { data: null, error: { message: "Something Went Wrong" } };
-        }
-    },
-
-    // Delete meal (For Provider)
-    deleteMeal: async function (id: string) {
-        try {
-            const url = new URL(`${NEXT_PUBLIC}/provider/meals/${id}`);
-            const res = await fetch(url.toString(), {
-                credentials: "include"
-            })
-            return {
-                data: res,
-                success: true
-            }
-        }
-        catch (err) {
-            return { data: null, error: { message: "Something Went Wrong" } };
-        }
     }
-
-
 }

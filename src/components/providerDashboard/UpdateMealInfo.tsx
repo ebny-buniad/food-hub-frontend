@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { mealsServices } from "@/services/meals.service";
 import { toast } from "sonner";
+import { updateMeal } from "@/app/actions/mealsActions";
 
 const mealSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -49,7 +50,7 @@ export default function UpdateMealInfo({ mealInfo, categories }: Props) {
             onSubmit: mealSchema
         },
         onSubmit: async ({ value }) => {
-            const result = await mealsServices.updateMeal(mealInfo?.id, value);
+            const result = await updateMeal(mealInfo?.id, value);
             if(result?.success === true){
                 toast.success("Meal details updated!")
             }

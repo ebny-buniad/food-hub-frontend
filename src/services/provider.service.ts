@@ -50,39 +50,15 @@ export const providerServices = {
         }
     },
 
-    // Update order status
-    updateOrderStatus: async function (orderId: string, status: string) {
-        try {
-            const paylaod = { status: status }
-            console.log(paylaod)
-            const url = new URL(`${NEXT_PUBLIC}/provider/orders/status/${orderId}`);
-            const res = await fetch(url.toString(), {
-                method: "PATCH",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                credentials: "include",
-                body: JSON.stringify(paylaod)
-            });
-            const result = await res.json();
-            return {
-                data: result,
-                success: true
-            }
-        }
-        catch (err) {
-            return { data: null, error: { message: "Something Went Wrong" } };
-        }
-    },
-
     // Get provider stats
-    getProviderStats: async function (cookie: string) {
+    getProviderStats: async function () {
         try {
+            const cookieStore = await cookies();
             const url = new URL(`${NEXT_PUBLIC}/provider/stats`);
             const res = await fetch(url.toString(), {
                 method: "GET",
                 headers: {
-                    cookie: cookie
+                    cookie: cookieStore.toString()
                 },
                 credentials: "include"
             });
