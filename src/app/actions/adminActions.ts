@@ -74,7 +74,6 @@ export async function getAllOrders() {
 export async function createCategories(data: any) {
     try {
         const cookieStore = await cookies();
-        const payload = data;
         const url = new URL(`${API}/categories`);
         const res = await fetch(url.toString(), {
             method: "POST",
@@ -83,20 +82,25 @@ export async function createCategories(data: any) {
                 "Content-type": "application/json"
             },
             credentials: "include",
-            body: JSON.stringify(payload)
+            body: JSON.stringify(data),
+            cache: "no-store"
         });
-
-        const result = await res.json()
-
-        return {
-            data: result,
-            status: true
+        const result = await res.json();
+        if (!res.ok) {
+            return {
+                success: false,
+                data: result
+            };
         }
-    }
-    catch (err) {
         return {
-            data: null,
-            error: { message: "Something Went Wrong" },
+            success: true,
+            data: result
+        };
+
+    } catch (err) {
+        return {
+            success: false,
+            data: null
         };
     }
 }

@@ -27,13 +27,12 @@ export default function AddCategory() {
         // validators: categorySchema,
         onSubmit: async ({ value }) => {
             const result = await createCategories(value);
-            if (result?.data?.ok === true) {
-                toast.success("Ctegory created!");
+            if (result?.success) {
+                toast.success("Category created!");
                 form.reset();
                 router.refresh();
-            }
-            else {
-                toast.error("Duplicate category!")
+            } else {
+                toast.error("Duplicate category!");
             }
         }
     })
