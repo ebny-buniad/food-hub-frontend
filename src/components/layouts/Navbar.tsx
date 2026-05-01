@@ -92,7 +92,7 @@ const Navbar = ({
     },
     {
       title: "Contact",
-      url: "/restaurents",
+      url: "/contact",
     },
   ],
   auth = {
