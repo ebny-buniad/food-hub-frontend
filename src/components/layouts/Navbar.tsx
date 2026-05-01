@@ -86,6 +86,14 @@ const Navbar = ({
       title: "Restaurents",
       url: "/restaurents",
     },
+    {
+      title: "About",
+      url: "/about",
+    },
+    {
+      title: "Contact",
+      url: "/restaurents",
+    },
   ],
   auth = {
     cart: { title: ``, url: "/cart" },
