@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GourmetDash | Discover Exquisite Meals</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#410000",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "secondary-fixed": "#ffdcbe",
+                        "background": "#fcf9f8",
+                        "secondary-fixed-dim": "#ffb870",
+                        "outline": "#926f69",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#930000",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#e22619",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fcf9f8",
+                        "surface-container": "#f0eded",
+                        "tertiary-container": "#79746e",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-container": "#fffbff",
+                        "primary": "#bc0001",
+                        "surface-tint": "#c00001",
+                        "tertiary": "#605b56",
+                        "outline-variant": "#e7bdb6",
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-fixed": "#2c1600",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-fixed-variant": "#693c00",
+                        "inverse-primary": "#ffb4a8",
+                        "surface-container-highest": "#e5e2e1",
+                        "tertiary-fixed": "#e9e1da",
+                        "primary-fixed": "#ffdad4",
+                        "tertiary-fixed-dim": "#ccc5bf",
+                        "on-surface-variant": "#5d3f3b",
+                        "inverse-surface": "#313030",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#4a4641",
+                        "on-tertiary-fixed": "#1e1b17",
+                        "on-primary-container": "#fffbff",
+                        "on-secondary-container": "#673b00",
+                        "secondary": "#8b5000",
+                        "surface-container-high": "#eae7e7",
+                        "secondary-container": "#fe9c22",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "3rem",
+                        "container-max": "1280px",
+                        "base": "4px",
+                        "md": "1.5rem",
+                        "lg": "2rem",
+                        "gutter": "1.5rem",
+                        "sm": "1rem",
+                        "xs": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Be Vietnam Pro"],
+                        "display-xl": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-bold": ["14px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "display-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased">
+    <!-- TopNavBar Shell -->
+    <nav
+        class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800 shadow-sm shadow-orange-900/5 docked full-width top-0 sticky z-50 font-['Plus_Jakarta_Sans'] antialiased">
+        <div class="flex items-center justify-between px-6 py-3 w-full max-w-screen-2xl mx-auto">
+            <div class="text-2xl font-black tracking-tighter text-orange-600 dark:text-orange-400">GourmetDash</div>
+            <div class="hidden md:flex gap-8">
+                <a class="text-orange-600 dark:text-orange-400 font-bold border-b-2 border-orange-600 px-1 py-1"
+                    href="#">Explore</a>
+                <a class="text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors duration-200 px-1 py-1"
+                    href="#">Offers</a>
+                <a class="text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors duration-200 px-1 py-1"
+                    href="#">Top Rated</a>
+                <a class="text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors duration-200 px-1 py-1"
+                    href="#">Nearby</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="active:scale-95 transition-transform hover:bg-gray-50 p-2 rounded-full">
+                    <span class="material-symbols-outlined text-gray-600">shopping_cart</span>
+                </button>
+                <button class="active:scale-95 transition-transform hover:bg-gray-50 p-2 rounded-full">
+                    <span class="material-symbols-outlined text-gray-600">account_circle</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content Container -->
+    <main class="max-w-screen-2xl mx-auto px-4 py-10">
+        <!-- Search Section -->
+        <div class="max-w-3xl mx-auto mb-12 relative">
+            <div
+                class="relative flex items-center bg-white shadow-xl shadow-orange-900/5 rounded-xl border border-outline-variant/30 overflow-hidden">
+                <div class="pl-5 pr-3 text-orange-600">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+                <input
+                    class="w-full py-5 pr-6 bg-transparent border-none focus:ring-0 text-body-lg font-body-md text-on-surface"
+                    placeholder="Search for your favorite meals, cuisines, or restaurants..." type="text"
+                    value="Traditional It" />
+                <button
+                    class="mr-3 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary-container text-on-primary rounded-lg font-label-bold active:scale-95 transition-transform">
+                    Search
+                </button>
+            </div>
+            <!-- Autocomplete Suggestion Dropdown -->
+            <div
+                class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 z-40 overflow-hidden">
+                <div class="p-3">
+                    <div
+                        class="px-4 py-3 hover:bg-orange-50 rounded-lg cursor-pointer flex items-center gap-3 transition-colors">
+                        <span class="material-symbols-outlined text-gray-400">history</span>
+                        <span class="text-on-surface">Traditional <b>Italian</b> Lasagna</span>
+                    </div>
+                    <div
+                        class="px-4 py-3 hover:bg-orange-50 rounded-lg cursor-pointer flex items-center gap-3 transition-colors">
+                        <span class="material-symbols-outlined text-gray-400">restaurant</span>
+                        <span class="text-on-surface">Traditional <b>Indian</b> Curry</span>
+                    </div>
+                    <div
+                        class="px-4 py-3 hover:bg-orange-50 rounded-lg cursor-pointer flex items-center gap-3 transition-colors">
+                        <span class="material-symbols-outlined text-gray-400">trending_up</span>
+                        <span class="text-on-surface">Popular: Artisanal Pizzas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Trending Section -->
+        <section class="mb-16">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="font-headline-lg text-headline-lg flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary-container"
+                        style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                    Trending Now
+                </h2>
+                <button class="text-primary font-label-bold hover:underline">View All</button>
+            </div>
+            <div class="flex gap-6 overflow-x-auto no-scrollbar pb-4 -mx-4 px-4">
+                <!-- Trending Card 1 -->
+                <div class="flex-none w-72 group cursor-pointer">
+                    <div class="relative h-48 rounded-xl overflow-hidden mb-3">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="A gourmet close-up shot of a vibrant salmon avocado salad with citrus dressing in a sunlit outdoor garden setting. The lighting is high-key and warm, emphasizing the fresh colors of the ingredients. The composition is professional food photography with a shallow depth of field, reflecting a premium and healthy lifestyle brand aesthetic."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuChmXU9VIC1yyiEWuTK63zlBVOVsGEQihOP9Vd-o3-852AuaEfjLkTEych-PPt8ilcvATv6Mt1n0Kg8AHO03ljPJv-AgZwhBOM2wYUNtBhp0mo9ASaleR6I5ranwbciHhlZoxe1Au8u4k9W-X_C--GY5Qjg-xQbTv9ukojk85BDfum4X0RhbTZI3KbARKp38iCO-jk16gN2XdiRUJKzvpMUXUd1jhRAZfExLdGSSvDWfwJysNBIQbjyPUdPIWpoup4NxNPvAYRm1lc" />
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 bg-orange-600 text-white text-label-sm font-label-bold rounded-full shadow-lg">
+                            #1 Bestseller</div>
+                        <div
+                            class="absolute bottom-3 right-3 glass-card px-2 py-1 rounded-lg text-on-surface font-label-bold">
+                            $14.99</div>
+                    </div>
+                    <h3 class="font-headline-md text-body-lg truncate">Honey Glazed Atlantic Salmon</h3>
+                    <p class="text-on-surface-variant text-label-sm">Seafood • 15-20 min</p>
+                </div>
+                <!-- Trending Card 2 -->
+                <div class="flex-none w-72 group cursor-pointer">
+                    <div class="relative h-48 rounded-xl overflow-hidden mb-3">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="A professional top-down shot of a rustic wood-fired pizza with molten buffalo mozzarella and fresh basil leaves. The lighting is moody and warm, highlighting the charred texture of the crust and the vibrant red of the tomato sauce. The image captures an authentic, high-end Italian restaurant atmosphere with artisanal quality."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtW_GYTJDbkj7LZpG1qN6HrJnuIzBsC8aT0a_Z1dcK6ThJd0BPLElCUrIzI1bF3TbvhMPpB9yCpAz2pdT6ziah1ggkLYtWiSbT3VaKZ-CnwVSeZ6QajdHQX9tYhIFU1gmVqbsSL7JwPV52a7TRA4HVnshUL96ZDpnrvhvzT0ccFLOWpr5AIEXIUjOlEmSh3NXjtTLIVxaF9RoIbV5KrGLjx1SyjdPnj6JWxatfuLH_LprtBbCHirIz6jGJO-wZhJvGRmH0WRVw9E0" />
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 bg-secondary-container text-on-secondary-container text-label-sm font-label-bold rounded-full shadow-lg">
+                            New Arrival</div>
+                        <div
+                            class="absolute bottom-3 right-3 glass-card px-2 py-1 rounded-lg text-on-surface font-label-bold">
+                            $18.50</div>
+                    </div>
+                    <h3 class="font-headline-md text-body-lg truncate">Artisan Margherita Supreme</h3>
+                    <p class="text-on-surface-variant text-label-sm">Italian • 25-30 min</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="flex-none w-72 group cursor-pointer">
+                    <div class="relative h-48 rounded-xl overflow-hidden mb-3">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="A bright, clean studio shot of a Mediterranean Buddha bowl filled with chickpeas, kale, quinoa, and roasted sweet potatoes. The lighting is even and soft, showcasing the natural textures and high-saturation colors. The overall aesthetic is minimalist, modern, and focused on wellness and premium vegetarian dining."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI46cRf24pJNWCBVxRhtgIsNuYsSCIlSztukgHfKBtjZv7I9kSm2rT6BQHvJNBsNlEAE_nD8gwAqYsNjcmvug-PtAz10RSEm65sAzNUvr8aBKLww62oyQ9fjLBQnr0lwTRVOTj7KRcoADM3YHIECAkc5GpK9bSAiyvgcUm3gMOc5Qd_qql_Pf8CZgD7r9F7cxKc151Zzu86JfFevBPodYI7g1SYIjQcsn5Il8SqbT5mob9TIWlzXL90ug2Oird1AvHvtHe3MP8zOo" />
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 bg-green-600 text-white text-label-sm font-label-bold rounded-full shadow-lg">
+                            Vegan Choice</div>
+                        <div
+                            class="absolute bottom-3 right-3 glass-card px-2 py-1 rounded-lg text-on-surface font-label-bold">
+                            $12.00</div>
+                    </div>
+                    <h3 class="font-headline-md text-body-lg truncate">Zesty Quinoa Power Bowl</h3>
+                    <p class="text-on-surface-variant text-label-sm">Healthy • 10-15 min</p>
+                </div>
+                <!-- Card 4, 5, 6 Skeletons -->
+                <div class="flex-none w-72 animate-pulse">
+                    <div class="h-48 bg-surface-container rounded-xl mb-3"></div>
+                    <div class="h-6 w-3/4 bg-surface-container rounded mb-2"></div>
+                    <div class="h-4 w-1/2 bg-surface-container rounded"></div>
+                </div>
+                <div class="flex-none w-72 animate-pulse">
+                    <div class="h-48 bg-surface-container rounded-xl mb-3"></div>
+                    <div class="h-6 w-3/4 bg-surface-container rounded mb-2"></div>
+                    <div class="h-4 w-1/2 bg-surface-container rounded"></div>
+                </div>
+                <div class="flex-none w-72 animate-pulse">
+                    <div class="h-48 bg-surface-container rounded-xl mb-3"></div>
+                    <div class="h-6 w-3/4 bg-surface-container rounded mb-2"></div>
+                    <div class="h-4 w-1/2 bg-surface-container rounded"></div>
+                </div>
+            </div>
+        </section>
+        <div class="lg:flex gap-10">
+            <!-- Sidebar Filters -->
+            <aside
+                class="hidden lg:block w-72 h-fit sticky top-24 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="font-headline-md text-body-lg text-gray-900 dark:text-white">Filters</h3>
+                        <p class="text-label-sm text-gray-500">Narrow your search</p>
+                    </div>
+                    <button
+                        class="text-primary text-label-sm font-label-bold hover:bg-orange-50 px-2 py-1 rounded transition-colors">Clear
+                        Filters</button>
+                </div>
+                <div class="space-y-8">
+                    <!-- Cuisine Filter -->
+                    <div class="space-y-3">
+                        <span class="font-label-bold flex items-center gap-2 text-on-surface">
+                            <span class="material-symbols-outlined text-orange-500 text-[18px]">restaurant</span>
+                            Cuisine
+                        </span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button
+                                class="bg-orange-50 text-orange-600 rounded-lg px-3 py-2 text-sm font-medium border border-orange-200">Bangla</button>
+                            <button
+                                class="text-gray-500 dark:text-gray-400 px-3 py-2 text-sm font-medium hover:bg-gray-50 rounded-lg transition-all text-left">Indian</button>
+                            <button
+                                class="text-gray-500 dark:text-gray-400 px-3 py-2 text-sm font-medium hover:bg-gray-50 rounded-lg transition-all text-left">Italian</button>
+                            <button
+                                class="text-gray-500 dark:text-gray-400 px-3 py-2 text-sm font-medium hover:bg-gray-50 rounded-lg transition-all text-left">Chinese</button>
+                        </div>
+                    </div>
+                    <!-- Dietary -->
+                    <div class="space-y-3">
+                        <span class="font-label-bold flex items-center gap-2 text-on-surface">
+                            <span class="material-symbols-outlined text-orange-500 text-[18px]">eco</span>
+                            Dietary
+                        </span>
+                        <div class="flex flex-wrap gap-2">
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input class="rounded text-primary focus:ring-primary-container border-outline-variant"
+                                    type="checkbox" />
+                                <span
+                                    class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Halal</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input class="rounded text-primary focus:ring-primary-container border-outline-variant"
+                                    type="checkbox" />
+                                <span
+                                    class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Vegan</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input class="rounded text-primary focus:ring-primary-container border-outline-variant"
+                                    type="checkbox" />
+                                <span
+                                    class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Vegetarian</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Price Range -->
+                    <div class="space-y-3">
+                        <span class="font-label-bold flex items-center gap-2 text-on-surface">
+                            <span class="material-symbols-outlined text-orange-500 text-[18px]">payments</span>
+                            Price Range
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <input
+                                class="w-full bg-surface-container rounded-lg border-none focus:ring-2 focus:ring-orange-500 text-sm p-2"
+                                placeholder="Min" type="number" />
+                            <span class="text-gray-400">-</span>
+                            <input
+                                class="w-full bg-surface-container rounded-lg border-none focus:ring-2 focus:ring-orange-500 text-sm p-2"
+                                placeholder="Max" type="number" />
+                        </div>
+                    </div>
+                    <!-- Rating -->
+                    <div class="space-y-3">
+                        <span class="font-label-bold flex items-center gap-2 text-on-surface">
+                            <span class="material-symbols-outlined text-orange-500 text-[18px]">star</span>
+                            Rating
+                        </span>
+                        <div class="space-y-1">
+                            <button
+                                class="w-full flex items-center justify-between text-sm text-on-surface-variant hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                <div class="flex text-secondary-container">
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined">star</span>
+                                </div>
+                                <span>&amp; up</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Featured Toggle -->
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <span class="font-label-bold flex items-center gap-2 text-on-surface">
+                            <span class="material-symbols-outlined text-orange-500 text-[18px]">auto_awesome</span>
+                            Featured
+                        </span>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input class="sr-only peer" type="checkbox" />
+                            <div
+                                class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!-- Main Content Area -->
+            <div class="flex-1">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                    <div>
+                        <h1 class="font-headline-lg text-headline-lg text-on-surface">All Meals</h1>
+                        <p class="text-on-surface-variant">24 scrumptious meals found in your area</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-label-sm text-on-surface-variant whitespace-nowrap">Sort by:</span>
+                        <div class="relative group">
+                            <button
+                                class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-outline-variant shadow-sm text-sm font-label-bold">
+                                Popular
+                                <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Meals Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+                    <!-- Meal Card 1 -->
+                    <div
+                        class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="relative h-48">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A luxurious spread of gourmet flatbreads and roasted Mediterranean appetizers on a rustic wooden table. The lighting is warm and cinematic, coming from a low-angle sun. The colors are rich with deep browns, vibrant greens, and earthy reds, creating a premium and appetizing lifestyle vibe."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuASxDSrNxxF1UCIQ41bUSpGwIHyEJ3aoO3EncAKWXOjfyHBRUykL9wXo1DG277ZjowEnnViTTudpCOm3UmZoL9oNrmRRrnwSjqfxvb-LXqyVmwqtSfVGoGFbmDrvl0GhoI9UlELMgHDT5DFX_25OMvZzIM28q0qsJTZRK79c4PUwZhtgGyEGrOjf6b8vGluUJNWZls9UbNRpR3q1FVFS8I6C2KPYmkTx3J8xXLGihWwILtU2lLYpBY6ZpVCQZ8qPDwuH_1G1Olhbuc" />
+                            <div
+                                class="absolute top-2 right-2 glass-card px-2 py-1 rounded-md text-sm font-label-bold text-primary">
+                                $22.00</div>
+                            <div
+                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[10px] font-label-bold uppercase tracking-wider text-on-surface-variant">
+                                Italian</div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-headline-md text-body-md group-hover:text-primary transition-colors">
+                                    Truffle Penne Pasta</h3>
+                                <div class="flex items-center gap-1 text-secondary">
+                                    <span class="material-symbols-outlined text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="text-label-sm">4.8</span>
+                                </div>
+                            </div>
+                            <p class="text-on-surface-variant text-label-sm mb-4 line-clamp-1">Wild forest mushrooms,
+                                black truffle oil, parmesan cheese.</p>
+                            <button
+                                class="w-full py-3 bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-label-bold transition-all active:scale-95 flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Meal Card 2 -->
+                    <div
+                        class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="relative h-48">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A top-down shot of a gourmet pepperoni pizza with pools of golden honey and spicy chili flakes. The lighting is bright and crisp, highlighting the glistening oils and crisp crust. The palette is dominated by warm reds and oranges against a dark, slate-like background, suggesting a trendy, high-end urban pizzeria."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuArrYfz_E7jF4k749CQ8oEqngCvNhIRyr1_ANVWUgwJ6EGZ7rKiOBsBSWIsmJk9ysRSs4-aDrNhkhAUJm6QUPNmXETxbpT0NuSSTzDRw364n-euPjl61wuw-2EV8t69pzVKGMRSHGUdbr4w3x7PoEtJslkgGKxGg7ApD1r-zvdH4_s0-He3Mns86ujEf4iSrUkekvpbYFdATY94vNWz-rqCGmA96et411ah8Aiktq8XcDwxPPcnG7AK9Atuh9YmhFnbTCB3Gnr8wa0" />
+                            <div
+                                class="absolute top-2 right-2 glass-card px-2 py-1 rounded-md text-sm font-label-bold text-primary">
+                                $19.50</div>
+                            <div
+                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[10px] font-label-bold uppercase tracking-wider text-on-surface-variant">
+                                American</div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-headline-md text-body-md group-hover:text-primary transition-colors">Hot
+                                    Honey Pepperoni</h3>
+                                <div class="flex items-center gap-1 text-secondary">
+                                    <span class="material-symbols-outlined text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="text-label-sm">4.9</span>
+                                </div>
+                            </div>
+                            <p class="text-on-surface-variant text-label-sm mb-4 line-clamp-1">Spicy pepperoni,
+                                mozzarella, Mike's hot honey drizzle.</p>
+                            <button
+                                class="w-full py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-lg font-label-bold shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Meal Card 3 -->
+                    <div
+                        class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="relative h-48">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A beautifully plated dish of aromatic Indian Biryani served in an ornate brass pot, garnished with fresh cilantro and golden fried onions. The lighting is low-key and dramatic, focusing on the steam rising from the rice. The warm color palette and heritage feel convey a premium, authentic traditional dining experience."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGgKLMYq8ep3GKy112zL_hxwMCaO4ku7LaU2b4d_BDWIDnQF5NUsM0UAjWVi7COV01477QCQAdfOEft2x9bQQ5cw-OmVjdit3svOXU4CpIyevAY9cgHU2QzB-fRhpVy66wghx8NCPqY8xBrXX3e6kZadgzo3GwhuNSSOYDnLxc-JGBapCrGWIIgjwx_3MWN67rwlLUoJ03YkKb2J8qXwGL_eBy5q3OLCLbvchBLLCS6yf7kEc_LlSfMs8fnI3ABZ1YxqNufQs6gH8" />
+                            <div
+                                class="absolute top-2 right-2 glass-card px-2 py-1 rounded-md text-sm font-label-bold text-primary">
+                                $16.00</div>
+                            <div
+                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[10px] font-label-bold uppercase tracking-wider text-on-surface-variant">
+                                Indian</div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-headline-md text-body-md group-hover:text-primary transition-colors">
+                                    Kochi Lamb Biryani</h3>
+                                <div class="flex items-center gap-1 text-secondary">
+                                    <span class="material-symbols-outlined text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="text-label-sm">4.7</span>
+                                </div>
+                            </div>
+                            <p class="text-on-surface-variant text-label-sm mb-4 line-clamp-1">Slow-cooked tender lamb
+                                with fragrant basmati rice.</p>
+                            <button
+                                class="w-full py-3 bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-label-bold transition-all active:scale-95 flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Skeletons (UX) -->
+                    <div class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm animate-pulse">
+                        <div class="h-48 bg-surface-container-high"></div>
+                        <div class="p-4 space-y-3">
+                            <div class="flex justify-between">
+                                <div class="h-5 w-2/3 bg-surface-container rounded"></div>
+                                <div class="h-5 w-1/4 bg-surface-container rounded"></div>
+                            </div>
+                            <div class="h-4 w-full bg-surface-container rounded"></div>
+                            <div class="h-10 w-full bg-surface-container rounded-lg mt-4"></div>
+                        </div>
+                    </div>
+                    <!-- Repeat Cards for Grid Context -->
+                    <div
+                        class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div class="relative h-48">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A vibrant, colorful sushi platter featuring fresh tuna and salmon nigiri on a sleek slate board. The lighting is studio-quality and bright, accentuating the glossy sheen of the fish. The minimal aesthetic uses a clean grey and white background with pops of bright orange and pink, perfect for a high-end Japanese dining app."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFLgcGI5VK56wzyZuQRt9AdJcCYQY0Iu_kS0igMV9__vXdOjdsYf55pW1igfeCcJNEjkm0W5k010Xs4XumDxb7En357xEU72eoMyFvOgqF6Ef2LAmneHrowa5wl7DpPNuum7cNVKQjCgKlbnJyt3nF2aXZ8AQx0BNK-3j2ofGJgESU30SYIRaReq5vCdsKQ0Yg930pAY22DcMVaDeuPBKQe2EpRm5ys6oFtKAJdOpNsieMWefLgqsAkK8oEy5YeayF4J6CVZNVaDM" />
+                            <div
+                                class="absolute top-2 right-2 glass-card px-2 py-1 rounded-md text-sm font-label-bold text-primary">
+                                $24.00</div>
+                            <div
+                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[10px] font-label-bold uppercase tracking-wider text-on-surface-variant">
+                                Japanese</div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-headline-md text-body-md group-hover:text-primary transition-colors">
+                                    Dragon Roll Deluxe</h3>
+                                <div class="flex items-center gap-1 text-secondary">
+                                    <span class="material-symbols-outlined text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="text-label-sm">4.9</span>
+                                </div>
+                            </div>
+                            <p class="text-on-surface-variant text-label-sm mb-4 line-clamp-1">Fresh unagi, avocado,
+                                tempura shrimp, eel sauce.</p>
+                            <button
+                                class="w-full py-3 bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-label-bold transition-all active:scale-95 flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div class="relative h-48">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A close-up of a premium, tall wagyu beef burger with melting cheese and artisan pickles on a brioche bun. The lighting is warm and directional, emphasizing the juice and texture of the meat. The dark, moody backdrop with warm accents creates a sophisticated and indulgent high-fidelity food presentation."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeqlCuBny9XGtYrj4Ldo4JWut9-miDkfsPHY3agfN1a9qmplX3moauNi4qLmRXummmhOKE7OH2tlDqfr9cwDpB30fnsmHr7C7j1gvV12mhQx2dameJ1eSW_OIh_gPZgX3dOThqOc8LdHCbhy1av6sa-H3CayF_Uu-8gbiMpjoqS9_0p7yRdYN_bLjzsa3Kd3ky13yNcpl0q4jT_kFemwJTxTzQ-1dXs-SgTMNI0F9PB0rqKg9iO32WRAqo-4OvmWDDr6MWw3r3rr8" />
+                            <div
+                                class="absolute top-2 right-2 glass-card px-2 py-1 rounded-md text-sm font-label-bold text-primary">
+                                $17.50</div>
+                            <div
+                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[10px] font-label-bold uppercase tracking-wider text-on-surface-variant">
+                                American</div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-headline-md text-body-md group-hover:text-primary transition-colors">
+                                    Wagyu Gold Burger</h3>
+                                <div class="flex items-center gap-1 text-secondary">
+                                    <span class="material-symbols-outlined text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="text-label-sm">4.6</span>
+                                </div>
+                            </div>
+                            <p class="text-on-surface-variant text-label-sm mb-4 line-clamp-1">A5 Wagyu beef, gold leaf,
+                                truffle aioli, aged cheddar.</p>
+                            <button
+                                class="w-full py-3 bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-label-bold transition-all active:scale-95 flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm animate-pulse">
+                        <div class="h-48 bg-surface-container-high"></div>
+                        <div class="p-4 space-y-3">
+                            <div class="flex justify-between">
+                                <div class="h-5 w-2/3 bg-surface-container rounded"></div>
+                                <div class="h-5 w-1/4 bg-surface-container rounded"></div>
+                            </div>
+                            <div class="h-4 w-full bg-surface-container rounded"></div>
+                            <div class="h-10 w-full bg-surface-container rounded-lg mt-4"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm animate-pulse">
+                        <div class="h-48 bg-surface-container-high"></div>
+                        <div class="p-4 space-y-3">
+                            <div class="flex justify-between">
+                                <div class="h-5 w-2/3 bg-surface-container rounded"></div>
+                                <div class="h-5 w-1/4 bg-surface-container rounded"></div>
+                            </div>
+                            <div class="h-4 w-full bg-surface-container rounded"></div>
+                            <div class="h-10 w-full bg-surface-container rounded-lg mt-4"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="mt-12 flex justify-center items-center gap-2">
+                    <button class="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button class="w-10 h-10 rounded-lg bg-primary text-white font-label-bold">1</button>
+                    <button
+                        class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 text-on-surface-variant font-label-bold">2</button>
+                    <button
+                        class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 text-on-surface-variant font-label-bold">3</button>
+                    <span class="text-gray-400">...</span>
+                    <button
+                        class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 text-on-surface-variant font-label-bold">6</button>
+                    <button class="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Floating Action Button for Cart -->
+    <button
+        class="fixed bottom-24 right-6 lg:bottom-10 lg:right-10 px-6 py-4 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-full shadow-2xl flex items-center gap-3 z-50 active:scale-95 transition-all group overflow-hidden">
+        <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform"></div>
+        <span class="material-symbols-outlined relative z-10">shopping_basket</span>
+        <span class="font-label-bold relative z-10">Cart • $56.49</span>
+        <span
+            class="bg-white text-primary text-[10px] w-5 h-5 flex items-center justify-center rounded-full relative z-10">3</span>
+    </button>
+    <!-- BottomNavBar for Mobile -->
+    <nav
+        class="lg:hidden fixed bottom-0 w-full z-50 rounded-t-3xl border-t border-gray-100 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+        <div class="flex justify-around items-center px-4 pt-3 pb-6 w-full max-w-screen-2xl mx-auto">
+            <a class="flex flex-col items-center justify-center text-orange-600 dark:text-orange-400 scale-110"
+                href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest mt-1">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-600 active:bg-orange-50 transition-all duration-300"
+                href="#">
+                <span class="material-symbols-outlined">search</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest mt-1">Search</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-600 active:bg-orange-50 transition-all duration-300"
+                href="#">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest mt-1">Orders</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-600 active:bg-orange-50 transition-all duration-300"
+                href="#">
+                <span class="material-symbols-outlined">shopping_basket</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest mt-1">Cart</span>
+            </a>
+        </div>
+    </nav>
+    <!-- Footer for large screens -->
+    <footer class="hidden lg:block bg-surface-container py-12 mt-xl border-t border-outline-variant/30">
+        <div class="max-w-screen-2xl mx-auto px-6 grid grid-cols-4 gap-8">
+            <div class="col-span-1">
+                <div class="text-2xl font-black tracking-tighter text-orange-600 mb-4">GourmetDash</div>
+                <p class="text-on-surface-variant text-sm">Experience the world's finest cuisines delivered to your
+                    doorstep. Quality and speed in every bite.</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-label-bold text-on-surface">Company</h4>
+                <ul class="text-sm text-on-surface-variant space-y-2">
+                    <li><a class="hover:text-primary" href="#">About Us</a></li>
+                    <li><a class="hover:text-primary" href="#">Careers</a></li>
+                    <li><a class="hover:text-primary" href="#">Partner with us</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-label-bold text-on-surface">Support</h4>
+                <ul class="text-sm text-on-surface-variant space-y-2">
+                    <li><a class="hover:text-primary" href="#">Help Center</a></li>
+                    <li><a class="hover:text-primary" href="#">Contact Support</a></li>
+                    <li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-label-bold text-on-surface">Download</h4>
+                <div class="flex gap-4">
+                    <div class="h-10 w-28 bg-on-background rounded-lg"></div>
+                    <div class="h-10 w-28 bg-on-background rounded-lg"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

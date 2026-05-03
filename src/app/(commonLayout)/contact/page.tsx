@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactPage() {
     return (
@@ -132,9 +133,11 @@ export default function ContactPage() {
                     Browse our menu and get your favorite meals delivered fast.
                 </p>
 
+                <Link href="/meals">
                 <Button className="bg-white text-red-500 hover:bg-gray-100 font-semibold px-6 py-3">
                     Order Now
                 </Button>
+                </Link>
             </section>
 
         </div>

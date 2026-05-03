@@ -58,6 +58,26 @@ export const mealsServices = {
             return { data: null, error: { message: "Something Went Wrong" } };
         }
     },
+
+    // Get trending meals
+    getTrendingMeals: async function () {
+        try {
+            const url = new URL(`${NEXT_PUBLIC}/meals-trending`);
+            const res = await fetch(url.toString());
+            const data = await res.json();
+            return {
+                data: data,
+                error: null
+            }
+        }
+        catch (err) {
+            return { data: null, error: { message: "Something Went Wrong" } };
+        }
+    },
+
+
+
+
     // Get all categories for filter items or meals
     getCategories: async function () {
         try {

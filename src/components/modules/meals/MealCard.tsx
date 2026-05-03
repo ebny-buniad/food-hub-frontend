@@ -1,25 +1,14 @@
 "use client"
+
 import { createCart } from "@/app/actions/createCart";
-import { cartServices } from "@/services/cart.service";
-import { Meal } from "@/types";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export function MealCard({ meal }: { meal: Meal }) {
-  const {
-    id,
-    providerId,
-    dietary,
-    category,
-    name,
-    description,
-    price,
-    thumbnail,
-    isAvailable,
-    reviews,
-    createdAt
-  } = meal;
+export function MealCard({ meal }: { meal: any }) {
+  const router = useRouter();
+  const { id, isAvailable } = meal;
 
   const [quantity, setQuantity] = useState(1)
   const increase = () => setQuantity((prev) => prev + 1)
@@ -29,82 +18,99 @@ export function MealCard({ meal }: { meal: Meal }) {
     try {
       const items = {
         mealId: id,
-        quantity: quantity
-      }
+        quantity: quantity,
+      };
       const { data, error } = await createCart(items);
-      if (error) {
-        toast.error(error.message);
+      if (!data?.success) {
+        toast.error("Login your account before order!");
+        router.push("/auth/login");
         return;
       }
-      toast.success("Added to cart successfully!")
-    }
-    catch (error) {
+      toast.success("Added to cart successfully!");
+    } catch (err) {
+      toast.error("Something went wrong");
     }
   }
 
   return (
-    <div >
-      <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
-        <div className="relative">
-          <img
-            src={thumbnail}
-            alt="Food"
-            className="w-full h-42 object-cover"
-          />
+    <div
+      key={meal.id}
+      className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+    >
+      {/* Image */}
+      <div className="relative h-48">
+        <img
+          src={meal.thumbnail}
+          alt={meal.name}
+          className="w-full h-full object-cover"
+        />
+
+        {/* Price */}
+        <div className="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-sm font-semibold text-gray-800">
+          ৳{meal.price}
         </div>
 
-        <div className="p-2 space-y-4">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">{name}</h3>
-            <p className="text-gray-500 mt-1">{description}</p>
-          </div>
+        {/* Cuisine */}
+        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider text-gray-600">
+          {meal?.category?.cuisine}
+        </div>
+      </div>
 
-          <div className="flex justify-between items-center">
-            <div className="space-y-1">
-              <p className="text-2xl font-bold text-gray-900">৳ {price}</p>
-            </div>
+      {/* Content */}
+      <div className="p-4">
+        <div className="flex justify-between items-start mb-1">
+          {/* Title */}
+          <h3 className="font-semibold text-base group-hover:text-red-500 transition-colors">
+            {meal.name}
+          </h3>
 
-            <div className="flex items-center gap-1">
-              <div className="text-yellow-400">★★★★</div>
-              <div className="text-gray-300">★</div>
-              <span className="text-sm text-gray-600 ml-1">{reviews?.length}</span>
-            </div>
-          </div>
-
-          {/* Quantity Selector */}
-          <div className="flex items-center rounded-md">
-            <button
-              onClick={decrease}
-              disabled={!isAvailable}
-              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-sm"
-            >
-              −
-            </button>
-
-            <span className="px-4 text-sm font-medium">
-              {quantity}
+          {/* Rating */}
+          <div className="flex items-center gap-1 text-yellow-500">
+            ★
+            <span className="text-sm">
+              {meal.ratingAvg || "0.0"}
             </span>
-
-            <button
-              onClick={increase}
-              disabled={!isAvailable}
-              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-sm"
-            >
-              +
-            </button>
           </div>
+        </div>
 
-          <div className="flex justify-end gap-3">
-            <button
-              onClick={() => handelCreateCart(id)}
-              disabled={!isAvailable}
-              className="bg-gray-50 border p-2 rounded-md text text-xs cursor-pointer">
-              {isAvailable ? "Add to Cart" : "Unavailable"}
-            </button>
-            <Link href={`/meals/${id}`} className="bg-black p-2 rounded-md text-white text-xs cursor-pointer">
-              Details
-            </Link>
-          </div>
+        {/* Description */}
+        <p className="text-gray-500 text-sm mb-4 line-clamp-1">
+          Delicious and freshly prepared meal.
+        </p>
+
+        <div className="flex items-center rounded-md mb-4">
+          <button
+            onClick={decrease}
+            disabled={!isAvailable}
+            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-sm"
+          >
+            −
+          </button>
+
+          <span className="px-4 text-sm font-medium">
+            {quantity}
+          </span>
+
+          <button
+            onClick={increase}
+            disabled={!isAvailable}
+            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-sm"
+          >
+            +
+          </button>
+        </div>
+
+        {/* Button */}
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={() => handelCreateCart(id)}
+            disabled={!isAvailable}
+            className="w-full py-2 bg-white border cursor-pointer border-red-500 text-red-500 rounded-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+            {isAvailable ? "🛒 Add to Cart" : "Unavailable"}
+          </button>
+          <Link href={`/meals/${id}`} className="bg-black p-2 rounded-md text-white text-xs cursor-pointer flex items-center justify-center gap-2">
+            Details
+          </Link>
         </div>
       </div>
     </div>
