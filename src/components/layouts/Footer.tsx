@@ -36,41 +36,25 @@ const Footer = ({
   tagline = "Finds you test!",
   menuItems = [
     {
-      title: "Product",
+      title: "Service",
       links: [
-        { text: "Overview", url: "#" },
-        { text: "Pricing", url: "#" },
-        { text: "Marketplace", url: "#" },
-        { text: "Features", url: "#" },
-        { text: "Integrations", url: "#" },
-        { text: "Pricing", url: "#" },
+        { text: "Become a Rider", url: "/become-rider" },
+        { text: "Become a Partner", url: "/become-partner" },
       ],
     },
     {
       title: "Company",
       links: [
-        { text: "About", url: "#" },
-        { text: "Team", url: "#" },
-        { text: "Blog", url: "#" },
-        { text: "Careers", url: "#" },
-        { text: "Contact", url: "#" },
-        { text: "Privacy", url: "#" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { text: "Help", url: "#" },
-        { text: "Sales", url: "#" },
-        { text: "Advertise", url: "#" },
+        { text: "About", url: "/about" },
+        { text: "Contact", url: "/contact" },
       ],
     },
     {
       title: "Social",
       links: [
-        { text: "Twitter", url: "#" },
-        { text: "Instagram", url: "#" },
-        { text: "LinkedIn", url: "#" },
+        { text: "Facebook", url: "https://www.facebook.com/" },
+        { text: "Instagram", url: "https://www.facebook.com/" },
+        { text: "LinkedIn", url: "https://www.facebook.com/" },
       ],
     },
   ],

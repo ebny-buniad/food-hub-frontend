@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import React from 'react'
 
 export default function FeaturedDecision() {
@@ -10,9 +11,11 @@ export default function FeaturedDecision() {
                     <div className='space-y-2'>
                         <h3 className='text-xl font-semibold'>List Your Restaurant on Food Hub</h3>
                         <p>Would you like millions of new customers to enjoy your amazing food and groceries? Let&apos;s start our partnership today!</p>
-                        <Button className='bg-red-500 mt-10'>
-                            Become a Partner
-                        </Button>
+                        <Link href="/become-partner">
+                            <Button className='bg-red-500 mt-10'>
+                                Become a Partner
+                            </Button>
+                        </Link>
                     </div>
                 </div>
                 <div className='flex items-center justify-end gap-5'>
@@ -20,9 +23,11 @@ export default function FeaturedDecision() {
                     <div className='space-y-2'>
                         <h3 className='text-xl font-semibold'>List Your Restaurant on Food Hub</h3>
                         <p>Would you like millions of new customers to enjoy your amazing food and groceries? Let&apos;s start our partnership today!</p>
-                        <Button className='bg-red-500 mt-10'>
-                            Become a Hero
-                        </Button>
+                        <Link href="/become-rider">
+                            <Button className='bg-red-500 mt-10'>
+                                Become a Hero
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>
