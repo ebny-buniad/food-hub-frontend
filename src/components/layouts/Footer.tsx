@@ -76,8 +76,8 @@ const Footer = ({
   ],
   copyright = "© 2026 Food Hub. All rights reserved.",
   bottomLinks = [
-    { text: "Terms and Conditions", url: "#" },
-    { text: "Privacy Policy", url: "#" },
+    { text: "Terms and Conditions", url: "terms-and-conditions" },
+    { text: "Privacy Policy", url: "privacy" },
   ],
 }: Footer2Props) => {
   return (

@@ -8,14 +8,16 @@ import { getUser } from "@/services/getUser";
 export default async function Home() {
 
   const user = await getUser();
-  console.log('user in home' ,user)
+  console.log('user in home', user)
 
   return (
-    <div className="container mx-auto">
+    <div>
       <Hero></Hero>
-      <FeaturedDecision></FeaturedDecision>
-      <FeaturedServices></FeaturedServices>
-      <DownloadApp></DownloadApp>
+      <div className="container mx-auto">
+        <FeaturedDecision></FeaturedDecision>
+        <FeaturedServices></FeaturedServices>
+        <DownloadApp></DownloadApp>
+      </div>
     </div>
   );
 }
